@@ -64,11 +64,11 @@
         "logo_text": "Logo",
         "menu": "",
         "business_link_text": "For businesses",
-        "business_link_url": "#",
-        "bg_color": "#3C1053",
-        "text_color": "#FFFFFF",
-        "border_color": "#BE99E6",
-        "divider_color": "#BE99E6"
+        "business_link_url": "shopify://collections/all",
+        "bg_color": "#3c1053",
+        "text_color": "#ffffff",
+        "border_color": "#be99e6",
+        "divider_color": "#be99e6"
       }
     }
   },

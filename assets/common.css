@@ -12,6 +12,7 @@ h2#verticalTitle {
 }
 #FacetFiltersForm details label .facet-checkbox__text-label {
   font-size: 16px;
+  text-decoration: none;
 }
 #FacetFiltersForm details {
   border-top: 0;
@@ -26,10 +27,7 @@ h2#verticalTitle {
   line-height: 150%;
   color: #151515;
 }
-#FacetFiltersForm details label.active {
+#FacetFiltersForm details label.active,
+#FacetFiltersForm details label:hover {
   color: #5a287d;
-}
-ul#product-grid li {
-  box-shadow: 2px 4px 10px 0px #0000000d;
-  border-radius: 17px;
 }

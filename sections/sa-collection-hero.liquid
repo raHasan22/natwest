@@ -1,0 +1,172 @@
+<section class="rh-collection-hero">
+    <div class="container_rh">
+      <h2 class="rh-collection-hero-title">
+        {{ section.settings.hero_title | default: 'All Courses' }}
+      </h2>
+      {%- if section.settings.hero_subtitle != blank -%}
+        <p class="rh-collection-hero-subtitle">
+          {{ section.settings.hero_subtitle }}
+        </p>
+      {%- endif -%}
+    </div>
+  </section>
+  {%  style  %}
+  /* collection hero */
+.rh-collection-hero {
+  background: {{ section.settings.background_color | default: '#5a287d' }};
+  padding: 27px 20px;
+}
+.rh-collection-hero .container_rh {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+.rh-collection-hero .rh-collection-hero-title {
+  font-family: "Knile", sans-serif;
+  font-weight: 400;
+  font-size: 56px;
+  line-height: 100%;
+  letter-spacing: normal;
+  text-align: {{ section.settings.text_alignment | default: 'center' }};
+  color: {{ section.settings.text_color | default: '#ffffff' }};
+  margin: 0;
+}
+.rh-collection-hero .rh-collection-hero-subtitle {
+  font-family: inherit;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 1.4;
+  text-align: {{ section.settings.text_alignment | default: 'center' }};
+  color: {{ section.settings.text_color | default: '#ffffff' }};
+  margin: 10px 0 0 0;
+  opacity: 0.9;
+}
+
+/* Collection Hero Responsive Design */
+@media (max-width: 1200px) {
+  .rh-collection-hero {
+    padding: 25px 20px;
+  }
+  .rh-collection-hero .rh-collection-hero-title {
+    font-size: 48px;
+  }
+  .rh-collection-hero .rh-collection-hero-subtitle {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 992px) {
+  .rh-collection-hero {
+    padding: 22px 20px;
+  }
+  .rh-collection-hero .rh-collection-hero-title {
+    font-size: 42px;
+  }
+  .rh-collection-hero .rh-collection-hero-subtitle {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .rh-collection-hero {
+    padding: 20px 15px;
+  }
+  .rh-collection-hero .rh-collection-hero-title {
+    font-size: 36px;
+  }
+  .rh-collection-hero .rh-collection-hero-subtitle {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 576px) {
+  .rh-collection-hero {
+    padding: 18px 10px;
+  }
+  .rh-collection-hero .rh-collection-hero-title {
+    font-size: 28px;
+  }
+  .rh-collection-hero .rh-collection-hero-subtitle {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .rh-collection-hero {
+    padding: 15px 8px;
+  }
+  .rh-collection-hero .rh-collection-hero-title {
+    font-size: 24px;
+  }
+  .rh-collection-hero .rh-collection-hero-subtitle {
+    font-size: 12px;
+  }
+}
+
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Collection Hero",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content Settings"
+    },
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Hero Title",
+      "default": "All Courses"
+    },
+    {
+      "type": "textarea",
+      "id": "hero_subtitle",
+      "label": "Hero Subtitle",
+      "info": "Optional subtitle text below the main title"
+    },
+    {
+      "type": "header",
+      "content": "Design Settings"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#5a287d"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    }
+  ],
+  "presets": [
+    {
+      "name": "SA Collection Hero"
+    }
+  ]
+}
+{% endschema %}

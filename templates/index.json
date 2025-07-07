@@ -123,7 +123,7 @@
             "title": "Learn to speak a new language with confidence",
             "content": "With Babbel, you'll learn practical and useful skills that you can apply right away — so you can reach your goal of having real-life conversations faster.",
             "button_text": "Learn Now",
-            "button_url": "shopify://collections/courses"
+            "button_url": "/collections/all"
           }
         },
         "sa_language_learning_item_QqyzhU": {
@@ -135,7 +135,7 @@
             "title": "Learn at your own pace",
             "content": "Achieve your goals with course material that’s tailored to your proficiency level, interests, and time commitment. Stay motivated with real-time feedback, progress trackers, and handy visualizations. ",
             "button_text": "Learn More",
-            "button_url": "shopify://collections"
+            "button_url": "/collections/all"
           }
         },
         "sa_language_learning_item_YPrkVF": {
@@ -147,7 +147,7 @@
             "title": "Develop your language skillswith a variety of tools",
             "content": "With Babbel, you’ll learn practical and useful skills that you can apply right\naway — so you can reach your goal of having real-life conversations faster.",
             "button_text": "Learn More",
-            "button_url": "shopify://collections"
+            "button_url": "/collections/all"
           }
         }
       },

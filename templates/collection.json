@@ -11,10 +11,32 @@
   "sections": {
     "banner": {
       "type": "main-collection-banner",
+      "disabled": true,
+      "custom_css": [],
       "settings": {
         "show_collection_description": true,
         "show_collection_image": false,
         "color_scheme": "scheme-1"
+      }
+    },
+    "sa_collection_hero_9N76Hq": {
+      "type": "sa-collection-hero",
+      "name": "SA Collection Hero",
+      "settings": {
+        "hero_title": "All Courses",
+        "hero_subtitle": "",
+        "background_color": "#5a287d",
+        "text_color": "#ffffff",
+        "text_alignment": "center",
+        "title_size_desktop": 56,
+        "subtitle_size_desktop": 18,
+        "title_size_tablet": 48,
+        "subtitle_size_tablet": 16,
+        "title_size_mobile": 36,
+        "subtitle_size_mobile": 14,
+        "padding_desktop": 25,
+        "padding_tablet": 25,
+        "padding_mobile": 20
       }
     },
     "product-grid": {
@@ -40,6 +62,7 @@
   },
   "order": [
     "banner",
+    "sa_collection_hero_9N76Hq",
     "product-grid"
   ]
 }
