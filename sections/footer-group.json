@@ -1,0 +1,99 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "sa_footer_aEUFRn": {
+      "type": "sa-footer",
+      "blocks": {
+        "column_eGWz3M": {
+          "type": "column",
+          "settings": {
+            "title": "Courses",
+            "menu": "courses"
+          }
+        },
+        "column_xWH8JQ": {
+          "type": "column",
+          "settings": {
+            "title": "More Babbel",
+            "menu": "more-babbel-1"
+          }
+        },
+        "column_jGWxMN": {
+          "type": "column",
+          "settings": {
+            "title": "Company",
+            "menu": "company"
+          }
+        },
+        "social_fNjbCF": {
+          "type": "social",
+          "settings": {
+            "facebook_url": "#",
+            "twitter_url": "#",
+            "youtube_url": "#",
+            "instagram_url": "#",
+            "linkedin_url": "#"
+          }
+        },
+        "legal_aeKDC8": {
+          "type": "legal",
+          "settings": {
+            "imprint_text": "Imprint",
+            "imprint_url": "#",
+            "terms_text": "Terms & Conditions",
+            "terms_url": "#",
+            "privacy_text": "Privacy Statement",
+            "privacy_url": "",
+            "personal_info_text": "Do Not Sell or Share My Personal Information",
+            "personal_info_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_eGWz3M",
+        "column_xWH8JQ",
+        "column_jGWxMN",
+        "social_fNjbCF",
+        "legal_aeKDC8"
+      ],
+      "name": "Custom Footer",
+      "settings": {
+        "bg_color": "#5A287D",
+        "text_color": "#FFFFFF",
+        "copyright_text": "© 2025 Babbel GmbH"
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "scheme-1",
+        "newsletter_enable": true,
+        "newsletter_heading": "Subscribe to our emails",
+        "enable_follow_on_shop": true,
+        "show_social": true,
+        "enable_country_selector": true,
+        "enable_language_selector": true,
+        "payment_enable": true,
+        "show_policy": true,
+        "margin_top": 0,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "sa_footer_aEUFRn",
+    "footer"
+  ]
+}

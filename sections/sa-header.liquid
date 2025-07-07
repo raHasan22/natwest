@@ -1,0 +1,334 @@
+{% schema %}
+{
+  "name": "SA Dynamic Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo Image"
+    },
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo Text (if no image)",
+      "default": "Logo"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Navigation Menu"
+    },
+    {
+      "type": "text",
+      "id": "business_link_text",
+      "label": "Business Link Text",
+      "default": "For businesses"
+    },
+    {
+      "type": "url",
+      "id": "business_link_url",
+      "label": "Business Link URL"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#3C1053"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border Color",
+      "default": "#BE99E6"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "Divider Color",
+      "default": "#BE99E6"
+    }
+  ],
+  "presets": [
+    {
+      "name": "SA Dynamic Header"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+    a:empty, ul:empty, dl:empty, div:empty, section:empty, article:empty, p:empty, h1:empty, h2:empty, h3:empty, h4:empty, h5:empty, h6:empty{
+      display: block;
+    }
+
+    header.header-pr {
+      width: 100%;
+      background: {{ section.settings.bg_color }};
+      padding: 0 20px;
+      position: relative;
+    }
+
+   header.header-pr .header-container {
+      max-width: 1299.56px;
+      margin: 0 auto;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: {{ section.settings.bg_color }};
+    }
+
+   header.header-pr .logo {
+      color: {{ section.settings.text_color }};
+      font-size: 32px;
+      font-family: Knile, serif;
+      font-weight: 400;
+      line-height: 20px;
+    }
+
+  header.header-pr  .logo-image {
+      height: 40px;
+      width: auto;
+    }
+
+  header.header-pr  .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+  header.header-pr  .nav-link {
+      color: {{ section.settings.text_color }};
+      font-size: 16px;
+      font-family: Inter, sans-serif;
+      font-weight: 400;
+      line-height: 20px;
+      text-decoration: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+  header.header-pr  .divider {
+      width: 1px;
+      height: 24px;
+      background: {{ section.settings.divider_color }};
+    }
+
+  header.header-pr  .signup-btn,header.header-pr .account-btn {
+      color: {{ section.settings.text_color }};
+      font-size: 16px;
+      font-family: Inter, sans-serif;
+      font-weight: 400;
+      line-height: 20px;
+      border: 1px solid {{ section.settings.border_color }};
+      border-radius: 4000px;
+      padding: 8px 24px;
+      background: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+    }
+
+  header.header-pr  .lang-select {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+  header.header-pr  .lang-icon {
+      width: 20px;
+      height: 20px;
+      display: inline-block;
+      background: white;
+      border-radius: 50%;
+    }
+
+  header.header-pr  .chevron {
+      width: 12px;
+      height: 7px;
+      display: inline-block;
+      border-bottom: 2px solid {{ section.settings.text_color }};
+      border-right: 2px solid {{ section.settings.text_color }};
+      transform: rotate(45deg);
+      margin-left: 2px;
+    }
+
+  header.header-pr  .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      z-index: 200;
+    }
+
+  header.header-pr  .hamburger span {
+      position: absolute;
+      left: 4px;
+      right: 4px;
+      height: 3px;
+      background: {{ section.settings.text_color }};
+      border-radius: 2px;
+      transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+
+  header.header-pr  .hamburger span:nth-child(1) {
+      top: 8px;
+    }
+
+  header.header-pr  .hamburger span:nth-child(2) {
+      top: 14.5px;
+    }
+
+  header.header-pr  .hamburger span:nth-child(3) {
+      top: 21px;
+    }
+
+  header.header-pr  .hamburger.open span:nth-child(1) {
+      transform: translateY(6.5px) rotate(45deg);
+    }
+
+  header.header-pr  .hamburger.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+  header.header-pr  .hamburger.open span:nth-child(3) {
+      transform: translateY(-6.5px) rotate(-45deg);
+    }
+
+    @media (max-width: 768px) {
+  header.header-pr    .header-container {
+        height: 56px;
+        padding: 0 10px;
+      }
+
+      header.header-pr {
+        padding: 0 0px !important;
+      }
+
+   header.header-pr   .nav-actions {
+        display: none;
+        position: absolute;
+        top: 56px;
+        right: 0;
+        background: {{ section.settings.bg_color }};
+        flex-direction: column;
+        width: 100%;
+        gap: 0;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        z-index: 100;
+        padding: 12px 10px 16px 10px;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.25s;
+      }
+
+   header.header-pr   .nav-actions.open {
+        display: flex;
+        max-height: 300px;
+        opacity: 1;
+      }
+
+   header.header-pr   .divider {
+        display: none;
+      }
+
+   header.header-pr   .nav-link {
+        padding: 14px 14px 14px 14px;
+        width: 100%;
+        box-sizing: border-box;
+        border-radius: 6px;
+      }
+
+   header.header-pr   .signup-btn, .account-btn {
+        margin: 10px;
+        padding: 14px;
+        width: calc(100% - 20px);
+        box-sizing: border-box;
+        border-radius: 6px;
+      }
+
+     header.header-pr .hamburger {
+        display: flex;
+      }
+    }
+</style>
+
+<header class="header-pr">
+  <div class="header-container">
+    <a href="{{ routes.root_url }}" class="logo">
+      {% if section.settings.logo != blank %}
+        <img src="{{ section.settings.logo | img_url: 'x40' }}" alt="{{ shop.name }}" class="logo-image">
+      {% else %}
+        {{ section.settings.logo_text }}
+      {% endif %}
+    </a>
+
+    <button class="hamburger" id="srsHamburgerBtn" aria-label="Open menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="nav-actions" id="srsNavActions">
+      {% if section.settings.business_link_url != blank %}
+        <a href="{{ section.settings.business_link_url }}" class="nav-link">
+          {{ section.settings.business_link_text }}
+        </a>
+        <div class="divider"></div>
+      {% endif %}
+
+      {% if shop.customer_accounts_enabled %}
+        {% if customer %}
+          <a href="{{ routes.account_url }}" class="nav-link">My Account</a>
+          <div class="divider"></div>
+          <a href="{{ routes.account_logout_url }}" class="account-btn">Log Out</a>
+        {% else %}
+          <a href="{{ routes.account_login_url }}" class="nav-link">Log In</a>
+          <div class="divider"></div>
+          <a href="{{ routes.account_register_url }}" class="signup-btn">Sign Up</a>
+        {% endif %}
+      {% endif %}
+
+      {% if section.settings.menu != blank %}
+        {% for link in linklists[section.settings.menu].links %}
+          <div class="divider"></div>
+          <a href="{{ link.url }}" class="nav-link">{{ link.title }}</a>
+        {% endfor %}
+      {% endif %}
+    </nav>
+  </div>
+</header>
+
+<script>
+  const srsHamburgerBtn = document.getElementById('srsHamburgerBtn');
+  const srsNavActions = document.getElementById('srsNavActions');
+
+  if (srsHamburgerBtn && srsNavActions) {
+    srsHamburgerBtn.addEventListener('click', () => {
+      srsNavActions.classList.toggle('open');
+      srsHamburgerBtn.classList.toggle('open');
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!srsNavActions.contains(e.target) && !srsHamburgerBtn.contains(e.target)) {
+        srsNavActions.classList.remove('open');
+        srsHamburgerBtn.classList.remove('open');
+      }
+    });
+  }
+</script>

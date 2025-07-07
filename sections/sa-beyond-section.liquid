@@ -1,0 +1,440 @@
+<section class="rh-beyond-section">
+  <div class="container_rh">
+    <div class="sec-title">
+      {{ section.settings.section_title | default: 'Beyond the classroom' | newline_to_br }}
+    </div>
+    <div class="sec-des">
+      {{
+        section.settings.section_description
+        | default: 'Want to immerse yourself in your new language? Dive into a world of language learning content.'
+        | newline_to_br
+      }}
+    </div>
+    <div class="rh-flex-beyond">
+      {% for block in section.blocks %}
+        <div
+          class="rh-beyond-card"
+          style="background-color: {{ block.settings.card_bg_color }};"
+          {{ block.shopify_attributes }}
+        >
+          <div class="rh-beyond-card-img">
+            {% if block.settings.image %}
+              <img
+                src="{{ block.settings.image | image_url: width: 400, height: 240 }}"
+                alt="{{ block.settings.image.alt | default: block.settings.title }}"
+              >
+            {% else %}
+              <img
+                src="https://dummyimage.com/400x240/cccccc/666666&text={{ block.settings.title | default: 'Content' | url_encode }}"
+                alt="{{ block.settings.title | default: 'Content Card' }}"
+              >
+            {% endif %}
+          </div>
+          <div class="rh-beyond-card-content">
+            <div class="rh-beyond-card-title">
+              {{ block.settings.title | default: 'Card Title' }}
+            </div>
+            <div class="rh-beyond-card-des">
+              {{ block.settings.description | default: 'Card description goes here.' }}
+            </div>
+            {% if block.settings.button_text and block.settings.button_url %}
+              <a href="{{ block.settings.button_url }}" class="rh-beyond-card-btn">
+                {{ block.settings.button_text }}
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% style %}
+  .rh-beyond-section {
+    padding: 70px 20px;
+    background: #ffffff;
+  }
+  .rh-beyond-section .container_rh {
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+  .rh-beyond-section .container_rh .sec-title {
+    font-family: "Knile", sans-serif;
+    font-weight: 400;
+    font-size: 56px;
+    line-height: 100%;
+    letter-spacing: normal;
+    text-align: center;
+    color: #5a287d;
+    margin: 0 0 25px;
+  }
+  .rh-beyond-section .container_rh .sec-des {
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 120%;
+    letter-spacing: normal;
+    text-align: center;
+    color: #151515;
+    margin: 0 0 50px;
+  }
+
+  .rh-flex-beyond {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+  }
+  .rh-beyond-card {
+    width: 33.33%;
+    background: #FFFAF9; /* Fallback background */
+    border-radius: 7px;
+    padding: 17px;
+    box-shadow: 2px 4px 15px 0px #0000000D;
+    transition: all 0.3s ease;
+  }
+  .rh-beyond-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(90, 40, 125, 0.15), 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  .rh-beyond-card .rh-beyond-card-img {
+    width: 100%;
+    height: 240px;
+  }
+  .rh-beyond-card .rh-beyond-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+  .rh-beyond-card .rh-beyond-card-content {
+    padding: 26px 26px 21px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+  }
+  .rh-beyond-card .rh-beyond-card-content .rh-beyond-card-title {
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 40px;
+    letter-spacing: normal;
+    color: #5A287D;
+    margin: 0;
+    text-align: center;
+  }
+  .rh-beyond-card .rh-beyond-card-content .rh-beyond-card-des {
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: normal;
+    color: #646068;
+    margin: 0;
+    text-align: center;
+  }
+  .rh-beyond-card .rh-beyond-card-content .rh-beyond-card-btn {
+    background: #5a287d;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 240px;
+    width: 100%;
+    height: 50px;
+    padding: 10px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    transition: all 0.3s ease;
+  }
+
+  .rh-beyond-card .rh-beyond-card-content .rh-beyond-card-btn:hover {
+    background: #4a1f6b;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(90, 40, 125, 0.3);
+  }
+
+  /* Beyond Section Responsive Design */
+  @media (max-width: 1200px) {
+    .rh-beyond-section {
+      padding: 60px 20px;
+    }
+    .rh-beyond-section .container_rh .sec-title {
+      font-size: 48px;
+      margin: 0 0 20px;
+    }
+    .rh-beyond-section .container_rh .sec-des {
+      font-size: 16px;
+      margin: 0 0 40px;
+    }
+    .rh-flex-beyond {
+      gap: 30px;
+    }
+    .rh-beyond-card .rh-beyond-card-content .rh-beyond-card-title {
+      font-size: 26px;
+      line-height: 34px;
+    }
+  }
+
+  @media (max-width: 992px) {
+    .rh-beyond-section {
+      padding: 50px 20px;
+    }
+    .rh-beyond-section .container_rh .sec-title {
+      font-size: 42px;
+      margin: 0 0 18px;
+    }
+    .rh-beyond-section .container_rh .sec-des {
+      font-size: 16px;
+      margin: 0 0 35px;
+    }
+    .rh-flex-beyond {
+      gap: 25px;
+    }
+    .rh-beyond-card .rh-beyond-card-img {
+      height: 200px;
+    }
+    .rh-beyond-card .rh-beyond-card-content {
+      padding: 20px 20px 18px;
+      gap: 12px;
+    }
+    .rh-beyond-card .rh-beyond-card-content .rh-beyond-card-title {
+      font-size: 24px;
+      line-height: 30px;
+    }
+    .rh-beyond-card .rh-beyond-card-content .rh-beyond-card-des {
+      font-size: 15px;
+      line-height: 22px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .rh-beyond-section {
+      padding: 40px 15px;
+    }
+    .rh-beyond-section .container_rh .sec-title {
+      font-size: 36px;
+      margin: 0 0 15px;
+    }
+    .rh-beyond-section .container_rh .sec-des {
+      font-size: 16px;
+      margin: 0 0 30px;
+    }
+    .rh-flex-beyond {
+      flex-direction: column;
+      gap: 30px;
+      align-items: center;
+    }
+    .rh-beyond-card {
+      width: 100%;
+      max-width: 400px;
+    }
+    .rh-beyond-card .rh-beyond-card-img {
+      height: 220px;
+    }
+    .rh-beyond-card .rh-beyond-card-content {
+      padding: 24px 24px 20px;
+      gap: 15px;
+    }
+    .rh-beyond-card .rh-beyond-card-content .rh-beyond-card-title {
+      font-size: 26px;
+      line-height: 32px;
+    }
+    .rh-beyond-card .rh-beyond-card-content .rh-beyond-card-des {
+      font-size: 16px;
+      line-height: 24px;
+    }
+    .rh-beyond-card .rh-beyond-card-content .rh-beyond-card-btn {
+      max-width: 200px;
+      height: 48px;
+      font-size: 16px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .rh-beyond-section {
+      padding: 30px 10px;
+    }
+    .rh-beyond-section .container_rh .sec-title {
+      font-size: 28px;
+      margin: 0 0 12px;
+    }
+    .rh-beyond-section .container_rh .sec-des {
+      font-size: 15px;
+      line-height: 22px;
+      margin: 0 0 25px;
+    }
+    .rh-flex-beyond {
+      gap: 25px;
+    }
+    .rh-beyond-card {
+      max-width: 350px;
+    }
+    .rh-beyond-card .rh-beyond-card-img {
+      height: 180px;
+    }
+    .rh-beyond-card .rh-beyond-card-content {
+      padding: 20px 20px 18px;
+      gap: 12px;
+    }
+    .rh-beyond-card .rh-beyond-card-content .rh-beyond-card-title {
+      font-size: 22px;
+      line-height: 28px;
+    }
+    .rh-beyond-card .rh-beyond-card-content .rh-beyond-card-des {
+      font-size: 14px;
+      line-height: 20px;
+    }
+    .rh-beyond-card .rh-beyond-card-content .rh-beyond-card-btn {
+      max-width: 180px;
+      height: 45px;
+      font-size: 15px;
+      padding: 8px 16px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .rh-beyond-section {
+      padding: 25px 8px;
+    }
+    .rh-beyond-section .container_rh .sec-title {
+      font-size: 24px;
+      margin: 0 0 10px;
+    }
+    .rh-beyond-section .container_rh .sec-des {
+      font-size: 14px;
+      line-height: 20px;
+      margin: 0 0 20px;
+    }
+    .rh-flex-beyond {
+      gap: 20px;
+    }
+    .rh-beyond-card {
+      max-width: 100%;
+    }
+    .rh-beyond-card .rh-beyond-card-img {
+      height: 160px;
+    }
+    .rh-beyond-card .rh-beyond-card-content {
+      padding: 18px 18px 16px;
+      gap: 10px;
+    }
+    .rh-beyond-card .rh-beyond-card-content .rh-beyond-card-title {
+      font-size: 20px;
+      line-height: 26px;
+    }
+    .rh-beyond-card .rh-beyond-card-content .rh-beyond-card-des {
+      font-size: 13px;
+      line-height: 18px;
+    }
+    .rh-beyond-card .rh-beyond-card-content .rh-beyond-card-btn {
+      max-width: 160px;
+      height: 42px;
+      font-size: 14px;
+      padding: 8px 14px;
+    }
+  }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Beyond Classroom Section",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Beyond the classroom"
+    },
+    {
+      "type": "textarea",
+      "id": "section_description",
+      "label": "Section Description",
+      "default": "Want to immerse yourself in your new language? Dive into a world of language learning content."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "sa_beyond_card",
+      "name": "Beyond Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Card Image"
+        },
+        {
+          "type": "color",
+          "id": "card_bg_color",
+          "label": "Card Background Color",
+          "default": "#FFFAF9"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Card Title",
+          "default": "Card Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Card Description",
+          "default": "Card description goes here."
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "Learn More"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Button URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SA Beyond Classroom Section",
+      "blocks": [
+        {
+          "type": "sa_beyond_card",
+          "settings": {
+            "card_bg_color": "#FFFAF9",
+            "title": "Babbel Videos",
+            "description": "Discover the weird and wonderful things that make a language so fascinating.",
+            "button_text": "Watch"
+          }
+        },
+        {
+          "type": "sa_beyond_card",
+          "settings": {
+            "card_bg_color": "#F0F8FF",
+            "title": "Babbel Podcasts",
+            "description": "Learn from the experts and get the latest tips and tricks.",
+            "button_text": "Listen"
+          }
+        },
+        {
+          "type": "sa_beyond_card",
+          "settings": {
+            "card_bg_color": "#F5F0FF",
+            "title": "Babbel Stories",
+            "description": "Learn from the experts and get the latest tips and tricks.",
+            "button_text": "Read"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

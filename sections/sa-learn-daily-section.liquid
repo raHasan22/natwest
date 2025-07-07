@@ -1,0 +1,280 @@
+{% schema %}
+{
+  "name": "SA Language Cards Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Babbel helps millions learn daily"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#5A287D"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Content Background Color",
+      "default": "#5A287D"
+    },
+    {
+      "type": "range",
+      "id": "desktop_columns",
+      "label": "Cards per row (desktop)",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "mobile_columns",
+      "label": "Cards per row (mobile)",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "section_padding",
+      "label": "Section Padding (top/bottom)",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 70
+    }
+  ],
+  "blocks": [
+    {
+      "type": "language_card",
+      "name": "Language Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Language Icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Language Name",
+          "default": "Spanish (Mexico)"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Card Link"
+        },
+        {
+          "type": "color",
+          "id": "card_bg",
+          "label": "Card Background",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "color",
+          "id": "card_border",
+          "label": "Card Border Color",
+          "default": "#5A287D"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text Color",
+          "default": "#151515"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SA Language Cards Section",
+      "category": "Custom",
+      "blocks": [
+        {
+          "type": "language_card",
+          "settings": {
+            "title": "Spanish (Mexico)"
+          }
+        },
+        {
+          "type": "language_card",
+          "settings": {
+            "title": "French"
+          }
+        },
+        {
+          "type": "language_card",
+          "settings": {
+            "title": "German"
+          }
+        },
+        {
+          "type": "language_card",
+          "settings": {
+            "title": "Italian"
+          }
+        },
+        {
+          "type": "language_card",
+          "settings": {
+            "title": "Portuguese"
+          }
+        },
+        {
+          "type": "language_card",
+          "settings": {
+            "title": "Russian"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+    .nat-learn-daily-section {
+      padding: {{ section.settings.section_padding }}px 0;
+    }
+
+    .nat-learn-daily-section .container {
+      max-width: 1340px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    .nat-learn-daily-section h2.title {
+      font-family: Knile;
+      font-weight: 400;
+      font-size: 56px;
+      line-height: 56px;
+      letter-spacing: 0%;
+      text-align: center;
+      vertical-align: middle;
+      color: {{ section.settings.title_color }};
+      margin-bottom: 30px;
+    }
+
+    .nat-learn-daily-section .nat-learn-daily-section-content {
+      background: {{ section.settings.background_color }};
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 21px 30px;
+      border-radius: 7px;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+   .nat-learn-daily-section .nxt-hero__language-card {
+      background: {{ block.settings.card_bg | default: '#FFFFFF' }};
+      border-radius: 7px;
+      border: 1px solid {{ block.settings.card_border | default: '#5A287D' }};
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      min-height: 57px;
+      text-decoration: none;
+    }
+
+   .nat-learn-daily-section .nxt-hero__language-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(90, 40, 125, 0.2);
+    }
+
+   .nat-learn-daily-section .nxt-hero__language-icon {
+      width: 25px;
+      height: 25px;
+      flex-shrink: 0;
+    }
+
+  .nat-learn-daily-section  img.nxt-hero__language-icon {
+      width: 20px;
+      height: 20px;
+      border: 1.5px solid #d7d4cf;
+      border-radius: 50%;
+    }
+
+  .nat-learn-daily-section  .nxt-hero__language-text {
+      color: {{ block.settings.text_color | default: '#151515' }};
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.2;
+    }
+
+    /* Responsive styles */
+    @media (min-width: 992px) {
+    .nat-learn-daily-section  .nxt-hero__language-card {
+        width: calc({{ 100 | divided_by: section.settings.desktop_columns }}% - {{ 14 | times: section.settings.desktop_columns | minus: 1 | divided_by: section.settings.desktop_columns }}px);
+        max-width: calc({{ 100 | divided_by: section.settings.desktop_columns }}% - {{ 14 | times: section.settings.desktop_columns | minus: 1 | divided_by: section.settings.desktop_columns }}px);
+      }
+    }
+
+    @media (max-width: 991px) {
+   .nat-learn-daily-section   .nat-learn-daily-section h2.title {
+        font-size: 42px;
+        line-height: 1.2;
+      }
+
+    .nat-learn-daily-section  .nat-learn-daily-section .nat-learn-daily-section-content {
+        padding: 21px 20px;
+      }
+
+   .nat-learn-daily-section   .nxt-hero__language-card {
+        width: calc({{ 100 | divided_by: section.settings.mobile_columns }}% - {{ 14 | times: section.settings.mobile_columns | minus: 1 | divided_by: section.settings.mobile_columns }}px);
+        max-width: calc({{ 100 | divided_by: section.settings.mobile_columns }}% - {{ 14 | times: section.settings.mobile_columns | minus: 1 | divided_by: section.settings.mobile_columns }}px);
+      }
+    }
+
+    @media (max-width: 480px) {
+   .nat-learn-daily-section   .nat-learn-daily-section h2.title {
+        font-size: 32px;
+      }
+
+   .nat-learn-daily-section   .nxt-hero__language-card {
+        width: 100%;
+        max-width: 100%;
+      }
+    }
+</style>
+
+<section class="nat-learn-daily-section">
+  <div class="container">
+    <h2 class="title">{{ section.settings.title }}</h2>
+    <div class="nat-learn-daily-section-content">
+      {% for block in section.blocks %}
+        {% if block.type == 'language_card' %}
+          <a
+            href="{{ block.settings.link | default: '#' }}"
+            class="nxt-hero__language-card"
+            {{ block.shopify_attributes }}
+          >
+            {% if block.settings.icon != blank %}
+              <img
+                src="{{ block.settings.icon | img_url: '40x40', crop: 'center' }}"
+                alt="{{ block.settings.title | escape }}"
+                class="nxt-hero__language-icon"
+              >
+            {% else %}
+              <img
+                src="https://placehold.co/20x20"
+                alt="{{ block.settings.title | escape }}"
+                class="nxt-hero__language-icon"
+              >
+            {% endif %}
+            <span class="nxt-hero__language-text">{{ block.settings.title }}</span>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>

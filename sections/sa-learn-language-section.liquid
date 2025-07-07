@@ -1,0 +1,385 @@
+<section class="rh-learning-ways-section">
+  <div class="container_rh">
+    <div class="sec-title">
+      {{ section.settings.section_title | default: 'The effective way to learn a language online' | newline_to_br }}
+    </div>
+
+    {% for block in section.blocks %}
+      <div
+        class="rh-flex-flip rh-flex-flip--{{ block.settings.flex_direction }}"
+        data-bg-color="{{ block.settings.image_bg_color }}"
+        {{ block.shopify_attributes }}
+      >
+        <div class="img-left" style="--bg-color: {{ block.settings.image_bg_color }};">
+          {% if block.settings.image %}
+            <img
+              src="{{ block.settings.image | image_url: width: 600 }}"
+              alt="{{ block.settings.image.alt | default: block.settings.title }}"
+              height="auto"
+              width="auto"
+            >
+          {% else %}
+            <img
+              src="https://dummyimage.com/600x400/cccccc/666666&text=Language+Learning"
+              alt="{{ block.settings.title | default: 'Language Learning' }}"
+            >
+          {% endif %}
+        </div>
+        <div class="text-left">
+          <div class="text-left-title">
+            {{ block.settings.title | default: 'Learn to speak a new language with confidence' }}
+          </div>
+          <div class="text-left-content">
+            {{
+              block.settings.content
+              | default: "With Babbel, you'll learn practical and useful skills that you can apply right away — so you can reach your goal of having real-life conversations faster."
+            }}
+          </div>
+          {% if block.settings.button_text and block.settings.button_url %}
+            <a href="{{ block.settings.button_url }}" class="text-primary-btn">
+              {{ block.settings.button_text }}
+            </a>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% style %}
+  .rh-learning-ways-section {
+    padding: 70px 20px 0;
+    background: #ffffff;
+  }
+  .rh-learning-ways-section .container_rh {
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+  .rh-learning-ways-section .sec-title {
+    font-family: "Knile", sans-serif;
+    font-weight: 400;
+    font-size: 56px;
+    line-height: 100%;
+    letter-spacing: normal;
+    text-align: center;
+    color: #5a287d;
+    margin: 0 0 70px;
+  }
+
+  .rh-flex-flip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 180px;
+    margin: 0 0 70px;
+  }
+
+  /* Dynamic flex directions for PC */
+  .rh-flex-flip--row {
+    flex-direction: row;
+  }
+
+  .rh-flex-flip--row-reverse {
+    flex-direction: row-reverse;
+  }
+
+  .rh-flex-flip .img-left {
+    width: 50%;
+    position: relative;
+    display: flex;
+    margin: 6px 0 0;
+  }
+
+  .rh-flex-flip .img-left::before {
+    content: "";
+    position: absolute;
+    display: block;
+    top: -6px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 8.79px;
+    background: var(--bg-color, #FFEAE6);
+    z-index: 0;
+  }
+
+  .rh-flex-flip .img-left img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8.79px;
+    position: relative;
+    z-index: 1;
+  }
+  .rh-flex-flip .text-left {
+    width: 50%;
+  }
+  .rh-flex-flip .text-left .text-left-title {
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 44px;
+    letter-spacing: normal;
+    color: #151515;
+    margin: 0 0 20px;
+  }
+  .rh-flex-flip .text-left .text-left-content {
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: normal;
+    color: #151515;
+    margin: 0 0 20px;
+  }
+  .text-primary-btn {
+    background: #5a287d;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 220px;
+    width: 100%;
+    height: 50px;
+    padding: 10px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    transition: all 0.3s ease;
+  }
+
+  .text-primary-btn:hover {
+    background: #4a1f6b;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(90, 40, 125, 0.3);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1200px) {
+    .rh-flex-flip {
+      gap: 100px;
+      margin: 0 0 60px;
+    }
+    .rh-learning-ways-section .sec-title {
+      font-size: 48px;
+      margin: 0 0 50px;
+    }
+    .rh-flex-flip .text-left .text-left-title {
+      font-size: 36px;
+      line-height: 40px;
+    }
+  }
+
+  @media (max-width: 992px) {
+    .rh-learning-ways-section {
+      padding: 50px 20px 0;
+    }
+    .rh-flex-flip {
+      gap: 60px;
+      margin: 0 0 50px;
+    }
+    .rh-learning-ways-section .sec-title {
+      font-size: 42px;
+      margin: 0 0 40px;
+    }
+    .rh-flex-flip .text-left .text-left-title {
+      font-size: 32px;
+      line-height: 36px;
+    }
+  }
+
+  /* Reset flex direction on mobile - force column layout */
+  @media (max-width: 768px) {
+    .rh-learning-ways-section {
+      padding: 40px 15px 0;
+    }
+    .rh-learning-ways-section .sec-title {
+      font-size: 36px;
+      margin: 0 0 30px;
+    }
+    .rh-flex-flip,
+    .rh-flex-flip--row,
+    .rh-flex-flip--row-reverse {
+      flex-direction: column !important;
+      gap: 30px;
+      margin: 0 0 40px;
+    }
+    .rh-flex-flip .img-left,
+    .rh-flex-flip .text-left {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .rh-flex-flip .text-left .text-left-title {
+      font-size: 28px;
+      line-height: 32px;
+      text-align: center;
+      margin: 0 0 15px;
+    }
+    .rh-flex-flip .text-left .text-left-content {
+      text-align: center;
+      margin: 0 0 25px;
+    }
+    .text-primary-btn {
+      margin: 0 auto;
+      max-width: 200px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .rh-learning-ways-section {
+      padding: 30px 10px 0;
+    }
+    .rh-learning-ways-section .sec-title {
+      font-size: 28px;
+      margin: 0 0 25px;
+    }
+    .rh-flex-flip {
+      margin: 0 0 30px;
+    }
+    .rh-flex-flip .text-left .text-left-title {
+      font-size: 24px;
+      line-height: 28px;
+    }
+    .rh-flex-flip .text-left .text-left-content {
+      font-size: 14px;
+      line-height: 20px;
+    }
+    .text-primary-btn {
+      max-width: 180px;
+      height: 45px;
+      font-size: 16px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .rh-learning-ways-section .sec-title {
+      font-size: 24px;
+    }
+    .rh-flex-flip .text-left .text-left-title {
+      font-size: 22px;
+      line-height: 26px;
+    }
+    .text-primary-btn {
+      max-width: 160px;
+      height: 42px;
+      font-size: 15px;
+      padding: 8px 16px;
+    }
+  }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Learn Language Section",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "The effective way to learn a language online"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "sa_language_learning_item",
+      "name": "Language Learning Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "color",
+          "id": "image_bg_color",
+          "label": "Image Background Color",
+          "default": "#FFEAE6"
+        },
+        {
+          "type": "select",
+          "id": "flex_direction",
+          "label": "Layout Direction (Desktop)",
+          "default": "row",
+          "options": [
+            {
+              "value": "row",
+              "label": "Image Left, Text Right"
+            },
+            {
+              "value": "row-reverse",
+              "label": "Text Left, Image Right"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Learn to speak a new language with confidence"
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Content",
+          "default": "With Babbel, you'll learn practical and useful skills that you can apply right away — so you can reach your goal of having real-life conversations faster."
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "Learn Now"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Button URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SA Learn Language Section",
+      "blocks": [
+        {
+          "type": "sa_language_learning_item",
+          "settings": {
+            "flex_direction": "row",
+            "image_bg_color": "#FFEAE6",
+            "title": "Learn to speak a new language with confidence",
+            "content": "With Babbel, you'll learn practical and useful skills that you can apply right away — so you can reach your goal of having real-life conversations faster.",
+            "button_text": "Learn Now"
+          }
+        },
+        {
+          "type": "sa_language_learning_item",
+          "settings": {
+            "flex_direction": "row-reverse",
+            "image_bg_color": "#E6F3FF",
+            "title": "Practice with real-world scenarios",
+            "content": "Our lessons are designed around practical topics and real situations you'll encounter, making your learning experience more relevant and engaging.",
+            "button_text": "Start Practice"
+          }
+        },
+        {
+          "type": "sa_language_learning_item",
+          "settings": {
+            "flex_direction": "row",
+            "image_bg_color": "#F0E6FF",
+            "title": "Track your progress effectively",
+            "content": "Monitor your learning journey with detailed progress tracking and personalized recommendations to help you achieve your language goals faster.",
+            "button_text": "View Progress"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

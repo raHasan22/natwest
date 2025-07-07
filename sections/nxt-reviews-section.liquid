@@ -1,0 +1,386 @@
+{% schema %}
+{
+  "name": "Testimonials Section",
+  "tag": "section",
+  "class": "nxt-reviews__area",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Main Heading",
+      "default": "People love Babbel"
+    },
+    {
+      "type": "text",
+      "id": "sub_heading",
+      "label": "Sub Heading",
+      "default": "Want to immerse yourself in your new language? Dive into a world of language learning content."
+    },
+    {
+      "type": "header",
+      "content": "Layout Settings"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 72
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#F2EAF9"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial_card",
+      "name": "Testimonial Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "review_image",
+          "label": "Review Image"
+        },
+        {
+          "type": "text",
+          "id": "review_name",
+          "label": "Review Name",
+          "default": "Maggie B."
+        },
+        {
+          "type": "text",
+          "id": "designation",
+          "label": "Designation",
+          "default": "TUMx Professional, Certificate Program in Lean Six Sigma"
+        },
+        {
+          "type": "text",
+          "id": "review_text",
+          "label": "Review Text",
+          "default": "This course helped me think about the person I want to be. The mental space that it afforded me allowed me to broaden my horizons and think about opportunities I hadn't considered before."
+        }
+      ]
+    }
+  ],
+
+  "presets": [
+    {
+      "name": "Testimonials Section",
+      "category": "Testimonials",
+      "blocks": [
+        {
+          "type": "testimonial_card",
+          "settings": {
+            "review_name": "Maggie B.",
+            "designation": "TUMx Professional, Certificate Program in Lean Six Sigma",
+            "review_text": "This course helped me think about the person I want to be. The mental space that it afforded me allowed me to broaden my horizons and think about opportunities I hadn't considered before."
+          }
+        },
+        {
+          "type": "testimonial_card",
+          "settings": {
+            "review_name": "Danielle D.",
+            "designation": "TUMx Professional, Certificate Program in Lean Six Sigma",
+            "review_text": "One employer was very interested in my boot camp experience and couldn't believe all I learned in just six months. I ended up getting that job."
+          }
+        },
+        {
+          "type": "testimonial_card",
+          "settings": {
+            "review_name": "Slim C.",
+            "designation": "TUMx Professional, Certificate Program in Lean Six Sigma",
+            "review_text": "One employer was very interested in my boot camp experience and couldn't believe all I learned in just six months. I ended up getting that job."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+{% style %}
+  .nxt-reviews__container {
+    background: {{ section.settings.background_color }};
+    padding-top: {{ section.settings.padding_top | times: 0.6 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.6 | round: 0 }}px;
+    padding-left: 43px;
+    padding-right: 43px;
+  }
+    @media (min-width: 768px) {
+      .nxt-reviews__container {
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+      }
+    }
+    /* Reviews Area */
+    .nxt-reviews__area {
+            padding: 0 15px;
+        }
+         .nxt-reviews__container{
+            width: 100%;
+            max-width: 1300px;
+            background: #F2EAF9;
+            border-radius: 7px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 50px;
+        }
+
+        /* Header Section */
+        .nxt-reviews__header {
+            width: 100%;
+            max-width: 546px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 25px;
+            text-align: center;
+        }
+
+        .nxt-reviews__title {
+            color: #5A287D;
+            font-size: 56px;
+            font-family: 'Knile', serif;
+            font-weight: 400;
+            word-wrap: break-word;
+            line-height: 1.2;
+            margin: 0;
+        }
+
+        .nxt-reviews__subtitle {
+            color: #151515;
+            font-size: 18px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            line-height: 1.5;
+            word-wrap: break-word;
+            margin: 0;
+        }
+
+        /* Cards Container */
+        .nxt-reviews__cards {
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 23.12px;
+            flex-wrap: wrap;
+        }
+
+        /* Individual Card */
+        .nxt-reviews__card {
+            flex: 1 1 0;
+            min-width: 300px;
+            height: auto;
+            min-height: 268.81px;
+            padding: 21.68px;
+            background: #FDFAFF;
+            border-radius: 11.56px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 34.69px;
+            position: relative;
+        }
+
+        /* Card Content */
+        .nxt-reviews__card-content {
+            display: flex;
+            flex-direction: column;
+            gap: 21px;
+        }
+
+        .nxt-reviews__quote-icon {
+            width: 59px;
+            height: 59px;
+            margin-top: -45px;
+        }
+
+        .nxt-reviews__testimonial {
+            color: #151515;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            line-height: 22.40px;
+            word-wrap: break-word;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            margin: 0;
+        }
+
+        /* Profile Section */
+        .nxt-reviews__profile {
+            display: flex;
+            align-items: center;
+            gap: 8.67px;
+        }
+
+        .nxt-reviews__avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            display: flex;
+        }
+
+        .nxt-reviews__profile-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 2.89px;
+        }
+
+        .nxt-reviews__name {
+            color: #151515;
+            font-size: 12px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            line-height: 19.20px;
+            word-wrap: break-word;
+        }
+
+        .nxt-reviews__title-desc {
+            color: #151515;
+            font-size: 12px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            line-height: 19.20px;
+            word-wrap: break-word;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1199px) {
+            .nxt-reviews__container {
+                max-width: 100%;
+                padding: 50px 30px;
+            }
+
+            .nxt-reviews__title {
+                font-size: 48px;
+            }
+        }
+
+        @media (max-width: 991px) {
+            .nxt-reviews__container {
+                padding: 40px 20px;
+            }
+
+            .nxt-reviews__title {
+                font-size: 40px;
+            }
+
+            .nxt-reviews__subtitle {
+                font-size: 16px;
+            }
+
+        }
+
+        @media (max-width: 767px) {
+            .nxt-reviews__container {
+                padding: 30px 15px;
+            }
+
+            .nxt-reviews__container {
+                gap: 30px;
+            }
+
+            .nxt-reviews__title {
+                font-size: 32px;
+            }
+
+            .nxt-reviews__cards {
+                flex-direction: column;
+                gap: 40px;
+            }
+
+            .nxt-reviews__card {
+                min-width: 100%;
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 575px) {
+            .nxt-reviews__title {
+                font-size: 28px;
+            }
+
+            .nxt-reviews__subtitle {
+                font-size: 14px;
+            }
+
+            .nxt-reviews__card {
+                padding: 15px;
+                min-height: auto;
+            }
+
+            .nxt-reviews__testimonial {
+                font-size: 13px;
+                line-height: 20px;
+            }
+        }
+{% endstyle %}
+<div class="nxt-reviews__container">
+  <div class="nxt-reviews__header">
+    <h2 class="nxt-reviews__title">{{ section.settings.heading }}</h2>
+    <p class="nxt-reviews__subtitle">
+      {{ section.settings.sub_heading }}
+    </p>
+  </div>
+
+  <div class="nxt-reviews__cards">
+    {% for block in section.blocks %}
+      <!-- Card 1 -->
+      <div class="nxt-reviews__card">
+        <div class="nxt-reviews__card-content">
+          <div class="nxt-reviews__quote-icon">
+            <svg width="59" height="59" viewBox="0 0 59 59" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M44.161 27.842C46.3252 27.842 48.1298 27.8419 49.5625 28.0345C51.0747 28.2378 52.4399 28.6851 53.5371 29.7822C54.6342 30.8793 55.0814 32.2445 55.2847 33.7567C55.4773 35.1894 55.4773 36.9941 55.4772 39.1583V39.4088C55.4773 41.573 55.4773 43.3776 55.2847 44.8103C55.0814 46.3225 54.6342 47.6877 53.5371 48.7849C52.4399 49.882 51.0747 50.3292 49.5625 50.5325C48.1299 50.7251 46.3252 50.7251 44.1611 50.725H44.161H43.9105H43.9103C41.7462 50.7251 39.9416 50.7251 38.5089 50.5325C36.9967 50.3292 35.6315 49.882 34.5344 48.7849C33.4373 47.6877 32.99 46.3225 32.7867 44.8103C32.5941 43.3776 32.5942 41.573 32.5942 39.4088V39.1583C32.5942 36.9941 32.5941 35.1894 32.7867 33.7567C32.99 32.2445 33.4373 30.8793 34.5344 29.7822C35.6315 28.6851 36.9967 28.2378 38.5089 28.0345C39.9416 27.8419 41.7463 27.842 43.9105 27.842H44.161Z" fill="#5A287D" />
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M51.755 10.2645C52.1508 11.5346 51.4421 12.885 50.172 13.2808C42.6865 15.6136 37.4117 22.2421 37.4117 29.9201V39.8859C37.4117 41.2162 36.3333 42.2946 35.003 42.2946C33.6727 42.2946 32.5942 41.2162 32.5942 39.8859V29.9201C32.5942 19.9327 39.4388 11.5797 48.7387 8.6815C50.0087 8.2857 51.3592 8.99443 51.755 10.2645Z" fill="#5A287D" />
+              <path d="M15.2562 27.842C17.4204 27.842 19.2251 27.8419 20.6577 28.0345C22.1699 28.2378 23.5352 28.6851 24.6323 29.7822C25.7294 30.8793 26.1766 32.2445 26.3799 33.7567C26.5726 35.1894 26.5725 36.9941 26.5724 39.1583V39.4088C26.5725 41.573 26.5726 43.3776 26.3799 44.8103C26.1766 46.3225 25.7294 47.6877 24.6323 48.7849C23.5352 49.882 22.1699 50.3292 20.6577 50.5325C19.2251 50.7251 17.4205 50.7251 15.2563 50.725H15.2562H15.0057H15.0056C12.8414 50.7251 11.0368 50.7251 9.60418 50.5325C8.09199 50.3292 6.72672 49.882 5.62962 48.7849C4.53251 47.6877 4.08528 46.3225 3.88197 44.8103C3.68936 43.3776 3.68942 41.573 3.68949 39.4088V39.1583C3.68942 36.9941 3.68936 35.1894 3.88197 33.7567C4.08528 32.2445 4.53251 30.8793 5.62962 29.7822C6.72672 28.6851 8.09199 28.2378 9.60418 28.0345C11.0368 27.8419 12.8415 27.842 15.0057 27.842H15.2562Z" fill="#5A287D" />
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M22.8502 10.2645C23.246 11.5346 22.5373 12.885 21.2673 13.2808C13.7817 15.6136 8.50694 22.2421 8.50694 29.9201V39.8859C8.50694 41.2162 7.42852 42.2946 6.09821 42.2946C4.76791 42.2946 3.68948 41.2162 3.68948 39.8859V29.9201C3.68948 19.9327 10.534 11.5797 19.8339 8.6815C21.104 8.2857 22.4544 8.99443 22.8502 10.2645Z" fill="#5A287D" />
+            </svg>
+          </div>
+          <p class="nxt-reviews__testimonial">“{{ block.settings.review_text }}”</p>
+        </div>
+        <div class="nxt-reviews__profile">
+          <div class="nxt-reviews__avatar">
+            {% if block.settings.review_image != blank %}
+              <img
+                src="{{ block.settings.review_image | image_url: width: 60 }}"
+                alt="{{ block.settings.review_name }}"
+              >
+            {% else %}
+              <img src="./assets/rv-1.png" alt="{{ block.settings.review_name }}">
+            {% endif %}
+          </div>
+          <div class="nxt-reviews__profile-info">
+            <div class="nxt-reviews__name">{{ block.settings.review_name }}</div>
+            <div class="nxt-reviews__title-desc">{{ block.settings.designation }}</div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>

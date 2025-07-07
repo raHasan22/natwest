@@ -1,0 +1,475 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "image_banner": {
+      "type": "image-banner",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Browse our latest products",
+            "heading_size": "h0"
+          }
+        },
+        "button": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "Shop all",
+            "button_link_1": "shopify://collections/all",
+            "button_style_secondary_1": true,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "button"
+      ],
+      "disabled": true,
+      "settings": {
+        "image_overlay_opacity": 40,
+        "image_height": "large",
+        "image_behavior": "none",
+        "desktop_content_position": "bottom-center",
+        "desktop_content_alignment": "center",
+        "show_text_box": false,
+        "color_scheme": "scheme-3",
+        "stack_images_on_mobile": false,
+        "mobile_content_alignment": "center",
+        "show_text_below": false
+      }
+    },
+    "nxt_hero_section_PTe3mW": {
+      "type": "nxt-hero-section",
+      "blocks": {
+        "language_card_X6BJtL": {
+          "type": "language_card",
+          "settings": {
+            "language_icon": "shopify://shop_images/Graphics-symbol_img.png",
+            "language_name": "Spanish (Mexico)",
+            "language_url": "shopify://collections/all"
+          }
+        },
+        "language_card_ARQ3nc": {
+          "type": "language_card",
+          "settings": {
+            "language_icon": "shopify://shop_images/Graphics-symbol_img_1.png",
+            "language_name": "Spanish (Spain)",
+            "language_url": "shopify://collections/all"
+          }
+        },
+        "language_card_PYRMBK": {
+          "type": "language_card",
+          "settings": {
+            "language_icon": "shopify://shop_images/Graphics-symbol_img_2.png",
+            "language_name": "French",
+            "language_url": "shopify://collections/all"
+          }
+        },
+        "language_card_adcEgC": {
+          "type": "language_card",
+          "settings": {
+            "language_icon": "shopify://shop_images/Graphics-symbol_img_3.png",
+            "language_name": "Italian",
+            "language_url": "shopify://collections/all"
+          }
+        },
+        "language_card_fBCJe8": {
+          "type": "language_card",
+          "settings": {
+            "language_icon": "shopify://shop_images/Graphics-symbol_img_4.png",
+            "language_name": "German",
+            "language_url": "shopify://collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "language_card_X6BJtL",
+        "language_card_ARQ3nc",
+        "language_card_PYRMBK",
+        "language_card_adcEgC",
+        "language_card_fBCJe8"
+      ],
+      "name": "Hero Area",
+      "settings": {
+        "heading": "Which language do you want to learn?",
+        "show_more_languages": true,
+        "more_languages_text": "More",
+        "more_languages_url": "shopify://collections/all",
+        "padding_top": 105,
+        "padding_bottom": 105,
+        "background_gradient": "linear-gradient(42deg, rgba(88, 40, 142, 1), rgba(166, 11, 85, 1) 100%)"
+      }
+    },
+    "sa_learn_language_section_K4GBrx": {
+      "type": "sa-learn-language-section",
+      "blocks": {
+        "sa_language_learning_item_XzYbPq": {
+          "type": "sa_language_learning_item",
+          "settings": {
+            "image": "shopify://shop_images/shutterstock_1878907303_1_7815be0a-5b62-404b-8aed-6185bf05b29e.png",
+            "image_bg_color": "#ffeae6",
+            "flex_direction": "row",
+            "title": "Learn to speak a new language with confidence",
+            "content": "With Babbel, you'll learn practical and useful skills that you can apply right away — so you can reach your goal of having real-life conversations faster.",
+            "button_text": "Learn Now",
+            "button_url": "shopify://collections/courses"
+          }
+        },
+        "sa_language_learning_item_QqyzhU": {
+          "type": "sa_language_learning_item",
+          "settings": {
+            "image": "shopify://shop_images/shutterstock_1179932260_1.png",
+            "image_bg_color": "#dbedfa",
+            "flex_direction": "row-reverse",
+            "title": "Learn at your own pace",
+            "content": "Achieve your goals with course material that’s tailored to your proficiency level, interests, and time commitment. Stay motivated with real-time feedback, progress trackers, and handy visualizations. ",
+            "button_text": "Learn More",
+            "button_url": "shopify://collections"
+          }
+        },
+        "sa_language_learning_item_YPrkVF": {
+          "type": "sa_language_learning_item",
+          "settings": {
+            "image": "shopify://shop_images/young-woman-teaching-kids-english-lesson-online_1.png",
+            "image_bg_color": "#ffdbec",
+            "flex_direction": "row",
+            "title": "Develop your language skillswith a variety of tools",
+            "content": "With Babbel, you’ll learn practical and useful skills that you can apply right\naway — so you can reach your goal of having real-life conversations faster.",
+            "button_text": "Learn More",
+            "button_url": "shopify://collections"
+          }
+        }
+      },
+      "block_order": [
+        "sa_language_learning_item_XzYbPq",
+        "sa_language_learning_item_QqyzhU",
+        "sa_language_learning_item_YPrkVF"
+      ],
+      "name": "SA Learn Language Section",
+      "settings": {
+        "section_title": "The effective way to learn a  language online"
+      }
+    },
+    "sa_method_section_nCn83F": {
+      "type": "sa-method-section",
+      "blocks": {
+        "sa_method_card_FDCRVP": {
+          "type": "sa_method_card",
+          "settings": {
+            "icon_type": "subscription",
+            "icon_color": "#5a287d",
+            "title": "15M",
+            "description": "Subscriptions Sold",
+            "highlight_card": false
+          }
+        },
+        "sa_method_card_DNmAFb": {
+          "type": "sa_method_card",
+          "settings": {
+            "icon_type": "chart",
+            "icon_color": "#5a287d",
+            "title": "92%",
+            "description": "of users improved their proficiency in just 2 months*",
+            "highlight_card": true
+          }
+        },
+        "sa_method_card_98BTLP": {
+          "type": "sa_method_card",
+          "settings": {
+            "icon_type": "team",
+            "icon_color": "#5a287d",
+            "title": "200+",
+            "description": "team of language experts",
+            "highlight_card": false
+          }
+        }
+      },
+      "block_order": [
+        "sa_method_card_FDCRVP",
+        "sa_method_card_DNmAFb",
+        "sa_method_card_98BTLP"
+      ],
+      "name": "SA Proven Method Section",
+      "settings": {
+        "section_title": "The Proven Babbel Method",
+        "section_description": "Learn a new language, fast. Our award-winning app uses the Babbel Method to help you speak confidently. You can complete quick lessons, practice conversations with an AI partner, listen to podcasts, and more."
+      }
+    },
+    "sa_beyond_section_Unh3eN": {
+      "type": "sa-beyond-section",
+      "blocks": {
+        "sa_beyond_card_JxKaK7": {
+          "type": "sa_beyond_card",
+          "settings": {
+            "image": "shopify://shop_images/shutterstock_2477017585_1.png",
+            "card_bg_color": "#fffaf9",
+            "title": "Babbel Videos",
+            "description": "Discover the weird and wonderful things that make a language so fascinating.",
+            "button_text": "Watch",
+            "button_url": "shopify://collections/all"
+          }
+        },
+        "sa_beyond_card_nGt7am": {
+          "type": "sa_beyond_card",
+          "settings": {
+            "image": "shopify://shop_images/shutterstock_2487930345.png",
+            "card_bg_color": "#f0f8ff",
+            "title": "Babbel Podcasts",
+            "description": "Learn from the experts and get the latest tips and tricks.",
+            "button_text": "Listen",
+            "button_url": "shopify://collections"
+          }
+        },
+        "sa_beyond_card_fmk6z7": {
+          "type": "sa_beyond_card",
+          "settings": {
+            "image": "shopify://shop_images/shutterstock_2469532579.png",
+            "card_bg_color": "#f5f0ff",
+            "title": "Babbel Stories",
+            "description": "Learn from the experts and get the latest tips and tricks.",
+            "button_text": "Read",
+            "button_url": "shopify://collections"
+          }
+        }
+      },
+      "block_order": [
+        "sa_beyond_card_JxKaK7",
+        "sa_beyond_card_nGt7am",
+        "sa_beyond_card_fmk6z7"
+      ],
+      "name": "SA Beyond Classroom Section",
+      "settings": {
+        "section_title": "Beyond the classroom",
+        "section_description": "Want to immerse yourself in your new language? Dive into a world of language learning content."
+      }
+    },
+    "nxt_reviews_section_jCXV7d": {
+      "type": "nxt-reviews-section",
+      "blocks": {
+        "testimonial_card_xFd4GC": {
+          "type": "testimonial_card",
+          "settings": {
+            "review_image": "shopify://shop_images/Ellipse_1383_2.png",
+            "review_name": "Maggie B.",
+            "designation": "TUMx Professional, Certificate Program in Lean Six Sigma",
+            "review_text": "This course helped me think about the person I want to be. The mental space that it afforded me allowed me to broaden my horizons and think about opportunities I hadn't considered before."
+          }
+        },
+        "testimonial_card_m7x7Yx": {
+          "type": "testimonial_card",
+          "settings": {
+            "review_image": "shopify://shop_images/Ellipse_1383_1.png",
+            "review_name": "Danielle D.",
+            "designation": "TUMx Professional, Certificate Program in Lean Six Sigma",
+            "review_text": "One employer was very interested in my boot camp experience and couldn't believe all I learned in just six months. I ended up getting that job."
+          }
+        },
+        "testimonial_card_XYyCeD": {
+          "type": "testimonial_card",
+          "settings": {
+            "review_image": "shopify://shop_images/Ellipse_1383.png",
+            "review_name": "Slim C.",
+            "designation": "TUMx Professional, Certificate Program in Lean Six Sigma",
+            "review_text": "One employer was very interested in my boot camp experience and couldn't believe all I learned in just six months. I ended up getting that job."
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_card_xFd4GC",
+        "testimonial_card_m7x7Yx",
+        "testimonial_card_XYyCeD"
+      ],
+      "name": "Testimonials Section",
+      "settings": {
+        "heading": "People love Babbel",
+        "sub_heading": "Want to immerse yourself in your new language? Dive into a world of language learning content.",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "background_color": "#f2eaf9"
+      }
+    },
+    "sa_faq_section_mepneM": {
+      "type": "sa-faq-section",
+      "blocks": {
+        "faq_item_x88BLB": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is Babbel for Business?",
+            "answer": "<p>This is the answer to your first question.</p>"
+          }
+        },
+        "faq_item_Uy9QQc": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How does Babbel for Business work?",
+            "answer": "<p>This is the answer to your second question.</p>"
+          }
+        },
+        "faq_item_dEgRQG": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Does Babbel for Business offer business-related language courses?",
+            "answer": "<p>This is the answer to your second question.</p>"
+          }
+        },
+        "faq_item_CkbVQf": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How can I track my team's progress?",
+            "answer": "<p>This is the answer to your second question.</p>"
+          }
+        },
+        "faq_item_ENeDtM": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Are there options to integrate Babbel with LMS or SSO?",
+            "answer": "<p>This is the answer to your second question.</p>"
+          }
+        },
+        "faq_item_9kPG9g": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do users get a certificate for completing a course?",
+            "answer": "<p>This is the answer to your second question.</p>"
+          }
+        },
+        "faq_item_bhmADY": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What are the pricing options for Babbel for Business?",
+            "answer": "<p>This is the answer to your second question.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_x88BLB",
+        "faq_item_Uy9QQc",
+        "faq_item_dEgRQG",
+        "faq_item_CkbVQf",
+        "faq_item_ENeDtM",
+        "faq_item_9kPG9g",
+        "faq_item_bhmADY"
+      ],
+      "name": "SA FAQ Section",
+      "settings": {
+        "title": "Frequently asked questions",
+        "title_color": "#5a287d",
+        "title_size": 2,
+        "button_color": "#5a287d",
+        "question_color": "#151515",
+        "answer_color": "#666666",
+        "padding_top": 50,
+        "padding_bottom": 50
+      }
+    },
+    "sa_learn_daily_section_kQe4Pw": {
+      "type": "sa-learn-daily-section",
+      "blocks": {
+        "language_card_PtLAQf": {
+          "type": "language_card",
+          "settings": {
+            "icon": "shopify://shop_images/Graphics-symbol_img.png",
+            "title": "Spanish (Mexico)",
+            "link": "",
+            "card_bg": "#ffffff",
+            "card_border": "#5a287d",
+            "text_color": "#151515"
+          }
+        },
+        "language_card_3ndFHR": {
+          "type": "language_card",
+          "settings": {
+            "icon": "shopify://shop_images/Graphics-symbol_img_1.png",
+            "title": "Spanish (Spain)",
+            "link": "",
+            "card_bg": "#ffffff",
+            "card_border": "#5a287d",
+            "text_color": "#151515"
+          }
+        },
+        "language_card_CJtKth": {
+          "type": "language_card",
+          "settings": {
+            "icon": "shopify://shop_images/Graphics-symbol_img_4.png",
+            "title": "German",
+            "link": "",
+            "card_bg": "#ffffff",
+            "card_border": "#5a287d",
+            "text_color": "#151515"
+          }
+        },
+        "language_card_wqGBdh": {
+          "type": "language_card",
+          "settings": {
+            "icon": "shopify://shop_images/Graphics-symbol_img_3.png",
+            "title": "Italian",
+            "link": "",
+            "card_bg": "#ffffff",
+            "card_border": "#5a287d",
+            "text_color": "#151515"
+          }
+        },
+        "language_card_RCfmjb": {
+          "type": "language_card",
+          "settings": {
+            "icon": "shopify://shop_images/Graphics-symbol_img_2.png",
+            "title": "France",
+            "link": "",
+            "card_bg": "#ffffff",
+            "card_border": "#5a287d",
+            "text_color": "#151515"
+          }
+        },
+        "language_card_tzehQm": {
+          "type": "language_card",
+          "settings": {
+            "icon": "shopify://shop_images/SVG_1.png",
+            "title": "More",
+            "link": "",
+            "card_bg": "#ffffff",
+            "card_border": "#5a287d",
+            "text_color": "#151515"
+          }
+        }
+      },
+      "block_order": [
+        "language_card_PtLAQf",
+        "language_card_3ndFHR",
+        "language_card_CJtKth",
+        "language_card_wqGBdh",
+        "language_card_RCfmjb",
+        "language_card_tzehQm"
+      ],
+      "name": "SA Language Cards Section",
+      "settings": {
+        "title": "Babbel helps millions learn daily",
+        "title_color": "#5a287d",
+        "background_color": "#5a287d",
+        "desktop_columns": 6,
+        "mobile_columns": 2,
+        "section_padding": 70
+      }
+    }
+  },
+  "order": [
+    "image_banner",
+    "nxt_hero_section_PTe3mW",
+    "sa_learn_language_section_K4GBrx",
+    "sa_method_section_nCn83F",
+    "sa_beyond_section_Unh3eN",
+    "nxt_reviews_section_jCXV7d",
+    "sa_faq_section_mepneM",
+    "sa_learn_daily_section_kQe4Pw"
+  ]
+}

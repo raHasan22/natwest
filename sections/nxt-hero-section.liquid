@@ -1,0 +1,244 @@
+{% schema %}
+{
+  "name": "Hero Area",
+  "tag": "section",
+  "class": "nxt-hero__area",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Main Heading",
+      "default": "Which language do you want to learn?"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Image"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_more_languages",
+      "label": "Show More Languages",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "more_languages_text",
+      "label": "More Languages Text",
+      "default": "More"
+    },
+    {
+      "type": "url",
+      "id": "more_languages_url",
+      "label": "More Languages URL",
+      "default": "\/collections\/all"
+    },
+    {
+      "type": "header",
+      "content": "Layout Settings"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 105
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 105
+    },
+    {
+      "type": "color_background",
+      "id": "background_gradient",
+      "label": "Card Background Gradient",
+      "default": "linear-gradient(42deg, #58288E 0%, #A60B55 100%)"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "language_card",
+      "name": "Language Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "language_icon",
+          "label": "Country Image"
+        },
+        {
+          "type": "text",
+          "id": "language_name",
+          "label": "Language Name"
+        },
+        {
+          "type": "url",
+          "id": "language_url",
+          "label": "Language URL",
+          "default": "\/collections\/all"
+        }
+      ]
+    }
+  ],
+
+  "presets": [
+    {
+      "name": "Hero Area",
+      "category": "Hero",
+      "blocks": [
+        {
+          "type": "language_card",
+          "settings": {
+            "language_name": "Spanish (Mexico)"
+          }
+        },
+        {
+          "type": "language_card",
+          "settings": {
+            "language_name": "Spanish (Spain)"
+          }
+        },
+        {
+          "type": "language_card",
+          "settings": {
+            "language_name": "French"
+          }
+        },
+        {
+          "type": "language_card",
+          "settings": {
+            "language_name": "Italian"
+          }
+        },
+        {
+          "type": "language_card",
+          "settings": {
+            "language_name": "German"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+{{ 'nxt-hero-section.css' | asset_url | stylesheet_tag }}
+{% style %}
+  .nxt-hero__area {
+    background: {{ section.settings.background_gradient }};
+    padding-top: {{ section.settings.padding_top | times: 0.6 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.6 | round: 0 }}px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+    @media (min-width: 768px) {
+      .nxt-hero__area {
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+      }
+    }
+{% endstyle %}
+
+<div class="nxt-hero__container">
+  <div class="nxt-hero__content">
+    <div class="nxt-hero__title-wrapper">
+      {% if section.settings.heading != blank %}
+        <h2 class="nxt-hero__title">{{ section.settings.heading }}</h2>
+      {% endif %}
+
+      <div class="white-svg">
+        <div class="colored-svg">
+          <svg
+            width="281"
+            height="65"
+            viewBox="0 0 281 65"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+                d="M0 1.04352C0 0.47453 0.474099 0.0202018 1.04257 0.044425L280.043 11.9329C280.578 11.9557 281 12.3963 281 12.932V64C281 64.5523 280.552 65 280 65H0.999993C0.447709 65 0 64.5523 0 64V1.04352Z"
+                fill="#E51565" />
+          </svg>
+        </div>
+        <svg
+          width="281"
+          height="65"
+          viewBox="0 0 281 65"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+              d="M0 1.04352C0 0.47453 0.474099 0.0202018 1.04257 0.044425L280.043 11.9329C280.578 11.9557 281 12.3963 281 12.932V64C281 64.5523 280.552 65 280 65H0.999993C0.447709 65 0 64.5523 0 64V1.04352Z"
+              fill="#F7F4F4" />
+        </svg>
+      </div>
+    </div>
+
+    <div class="nxt-hero__search-area">
+      <div class="nxt-hero__search-placeholder">
+        <div class="nxt-hero__languages">
+          <div class="nxt-hero__language-row">
+            {% for block in section.blocks %}
+              <a href="{{ block.settings.language_url }}" class="nxt-hero__language-card">
+                {% if block.settings.language_icon != blank %}
+                  <img
+                    src="{{ block.settings.language_icon | image_url: width: 25 }}"
+                    alt="{{ block.settings.language_name }}"
+                    class="nxt-hero__language-icon"
+                  >
+                {% else %}
+                  <img
+                    src="https://placehold.co/20x20"
+                    alt="{{ block.settings.language_name }}"
+                    class="nxt-hero__language-icon"
+                  >
+                {% endif %}
+                <span class="nxt-hero__language-text">{{ block.settings.language_name }}</span>
+              </a>
+            {% endfor %}
+            {% if section.settings.show_more_languages %}
+              <a href="{{ section.settings.more_languages_url }}" class="nxt-hero__language-card">
+                <svg class="nxt-hero__language-icon" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M21.8416 12.2852C21.8416 7.31664 17.8138 3.28882 12.8452 3.28882C7.87661 3.28882 3.84879 7.31664 3.84879 12.2852C3.84879 17.2538 7.87661 21.2816 12.8452 21.2816C17.8138 21.2816 21.8416 17.2538 21.8416 12.2852Z" fill="#FF7535"></path>
+                  <path d="M9.64645 12.2852H12.4453C12.5514 12.2852 12.6531 12.2431 12.7281 12.1681C12.803 12.0931 12.8452 11.9914 12.8452 11.8854V9.08649M16.0439 12.2852H13.245C13.139 12.2852 13.0373 12.3273 12.9623 12.4023C12.8873 12.4773 12.8452 12.579 12.8452 12.685V15.4839" stroke="white" stroke-width="0.79968" stroke-linejoin="round"></path>
+                  <path d="M12.8452 22.0313C7.46254 22.0313 3.09909 17.6679 3.09909 12.2852C3.09909 6.90258 7.46254 2.53912 12.8452 2.53912C18.2278 2.53912 22.5913 6.90258 22.5913 12.2852C22.5913 17.6679 18.2278 22.0313 12.8452 22.0313Z" stroke="#E9EAED" stroke-width="1.4994"></path>
+                </svg>
+                <span class="nxt-hero__language-text">{{ section.settings.more_languages_text }}</span>
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nxt-hero__image-area">
+    <div class="nxt-hero__image-bg">
+      <svg width="586" height="395" viewBox="0 0 586 395" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 2.16895C0 1.00057 0.997286 0.0809652 2.16184 0.17551L584.162 47.4255C585.2 47.5098 586 48.3771 586 49.419V393C586 394.105 585.105 395 584 395H2C0.895426 395 0 394.105 0 393V2.16895Z" fill="#F7F4F4"/>
+      </svg>
+    </div>
+    <div class="nxt-hero__image">
+      {% if section.settings.hero_image != blank %}
+        <img
+          src="{{ section.settings.hero_image | image_url: width: 586 }}"
+          alt="People learning languages together"
+          class="nxt-hero__image-img"
+        >
+      {% else %}
+        <img
+          src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+          alt="People learning languages together"
+          class="nxt-hero__image-img"
+        >
+      {% endif %}
+    </div>
+  </div>
+</div>

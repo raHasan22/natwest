@@ -1,0 +1,631 @@
+{% schema %}
+{
+  "name": "Course Page",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Course Page"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Course Page"
+    }
+  ]
+}
+{% endschema %}
+<link
+  rel="stylesheet"
+  href="{{ 'single-course.css' | asset_url }}"
+>
+{% style %}
+        /* Modal Styles */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(5px);
+      }
+
+      .modal-content {
+        position: relative;
+        background-color: #fff;
+        margin: 5% auto;
+        padding: 20px;
+        max-width: 800px;
+        width: 90%;
+        border-radius: 8px;
+        animation: modalopen 0.3s;
+      }
+
+      .close-modal {
+        position: absolute;
+        right: 20px;
+        top: 10px;
+        color: #aaa;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+        z-index: 2;
+      }
+
+      .close-modal:hover {
+        color: #333;
+      }
+
+      .video-container {
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 aspect ratio */
+        height: 0;
+        overflow: hidden;
+      }
+
+      .video-container video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 4px;
+      }
+
+      .no-trailer {
+        padding: 40px;
+        text-align: center;
+        color: #666;
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .modal-content {
+          margin: 10% auto;
+          width: 95%;
+          padding: 15px;
+        }
+
+        .video-container {
+          padding-bottom: 75%; /* More square aspect ratio for mobile */
+        }
+      }
+
+      @keyframes modalopen {
+        from {
+          opacity: 0;
+          transform: translateY(-50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      /* Modal Video Container */
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 aspect ratio */
+      height: 0;
+      overflow: hidden;
+    }
+
+    .video-container iframe,
+    .video-container video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .modal-content {
+        padding: 15px;
+        margin: 20% auto;
+        width: 95%;
+      }
+
+      .video-container {
+        padding-bottom: 75%; /* Taller aspect ratio for mobile */
+      }
+    }
+    /* Video Container - Responsive */
+  .video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+    background: #000;
+  }
+
+  /* Style all possible video elements */
+  .video-container > video,
+  .video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  /* Error states */
+  .unsupported-format {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .admin-notice {
+    font-size: 12px;
+    color: #ccc;
+    margin-top: 15px;
+    max-width: 80%;
+  }
+
+  .admin-notice ul {
+    text-align: left;
+    margin: 5px 0;
+  }
+{% endstyle %}
+<script>
+     document.addEventListener('DOMContentLoaded', function() {
+    // Modal functionality
+    const modal = document.getElementById('trailerModal');
+    const watchBtn = document.querySelector('.button-secondary');
+    const closeBtn = document.querySelector('.close-modal');
+
+    if (watchBtn) {
+      watchBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+
+        // Pause any playing videos when closing
+        const videos = modal.querySelectorAll('video');
+        videos.forEach(video => video.play());
+      });
+    }
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function() {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+
+        // Pause any playing videos when closing
+        const videos = modal.querySelectorAll('video');
+        videos.forEach(video => video.pause());
+      });
+    }
+
+    window.addEventListener('click', function(e) {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      }
+    });
+  });
+</script>
+
+<section class="course-hero">
+  {% if product.featured_image %}
+    <img src="{{ product.featured_image | img_url: 'master' }}" alt="{{ product.title }}" class="hero-background">
+  {% endif %}
+  <div class="hero-content">
+    <div class="hero-text">
+      <h1 class="hero-title">{{ product.title }}</h1>
+      <p class="hero-subtitle">
+        {% if product.metafields.custom.course_duration.value %}
+          {{ product.metafields.custom.course_duration.value }}
+          {{ product.title | split: ' ' | first }} Course
+        {% else %}
+          {{ product.title }} Course
+        {% endif %}
+      </p>
+      <div class="hero-actions">
+        <form method="post" action="/cart/add" class="product-form">
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+          <button type="submit" name="add" class="button-primary">
+            <span>Start Course</span>
+            <svg width="48" height="28" viewBox="0 0 48 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0_2017_141)">
+              <rect width="48" height="28" rx="6" fill="#5A287D"/>
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M27.085 14.8333L23.4236 18.5731C23.0493 18.9553 23.0493 19.5667 23.4236 19.949C23.8092 20.3429 24.4433 20.3429 24.8289 19.949L29.965 14.703C30.345 14.3148 30.345 13.6855 29.965 13.2974L24.8289 8.05105C24.4433 7.65715 23.8092 7.65713 23.4236 8.05101C23.0493 8.43328 23.0493 9.04462 23.4235 9.42691L27.0847 13.1667H18.5833C18.1231 13.1667 17.75 13.5398 17.75 14C17.75 14.4602 18.1231 14.8333 18.5833 14.8333H27.085Z" fill="white"/>
+              </g>
+              <defs>
+              <clipPath id="clip0_2017_141">
+              <rect width="48" height="28" rx="6" fill="white"/>
+              </clipPath>
+              </defs>
+            </svg>
+
+            {% comment %}
+              <img
+                src="{{
+                "Blue-arrow.png" | asset_url
+                }}"
+                alt=""
+                class="button-icon"
+              >
+            {% endcomment %}
+          </button>
+        </form>
+        <a href="#" class="button-secondary watch-trailer-btn">
+          <span>Watch Trailer</span>
+
+          <svg width="48" height="28" viewBox="0 0 48 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_33_10216)">
+            <rect width="48" height="28" rx="6" fill="white"/>
+            <path d="M18.1665 20.6667V7.33334L29.8332 14L18.1665 20.6667Z" stroke="#5A287D" stroke-width="1.5" stroke-linejoin="round"/>
+            </g>
+            <defs>
+            <clipPath id="clip0_33_10216">
+            <rect width="48" height="28" rx="6" fill="white"/>
+            </clipPath>
+            </defs>
+          </svg>
+
+          {% comment %}
+            <img
+              src="{{ "watchtra (1).png" | asset_url }}"
+              alt=""
+              class="button-icon"
+            >
+          {% endcomment %}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+<main class="course-content">
+  <div class="content-grid">
+    <div class="main-column">
+      <section class="about-section" id="about">
+        <h2 class="section-title">About this Course</h2>
+        <p class="section-text">
+          {% if product.description != blank %}
+            {{ product.description }}
+          {% else %}
+            There is no Description
+          {% endif %}
+        </p>
+      </section>
+
+      <section class="learning-section">
+        <h2 class="section-title">What you'll learn</h2>
+        <ul class="learning-list">
+          {% if product.metafields.custom.course_learn.value.size > 0 %}
+            {% for item in product.metafields.custom.course_learn.value %}
+              <li class="learning-item">
+                {% comment %}
+                  <img src="{{ 'tick-01.png' | asset_url }}" alt="Included feature">
+                {% endcomment %}
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3.05485 9.25979C2.70968 9.26076 2.37183 9.35944 2.0804 9.5444C1.78896 9.72937 1.55586 9.99306 1.40804 10.305C1.26022 10.6169 1.20374 10.9643 1.24512 11.307C1.2865 11.6497 1.42406 11.9736 1.64189 12.2414L6.28535 17.9296C6.45091 18.1352 6.66314 18.2983 6.90439 18.4054C7.14565 18.5125 7.40898 18.5605 7.6725 18.5454C8.23612 18.5151 8.74496 18.2136 9.06939 17.7179L18.715 2.18356C18.7166 2.18099 18.7183 2.17841 18.72 2.17587C18.8105 2.03691 18.7811 1.76152 18.5943 1.58852C18.543 1.54102 18.4825 1.50452 18.4165 1.48127C18.3506 1.45803 18.2806 1.44854 18.2108 1.45338C18.141 1.45822 18.073 1.47729 18.0109 1.50941C17.9488 1.54154 17.8939 1.58604 17.8496 1.64018C17.8462 1.64444 17.8426 1.64863 17.8389 1.65276L8.11116 12.6437C8.07414 12.6855 8.02918 12.7196 7.9789 12.7439C7.92861 12.7682 7.874 12.7822 7.81823 12.7852C7.76246 12.7883 7.70664 12.7802 7.65403 12.7614C7.60141 12.7427 7.55304 12.7137 7.51173 12.6761L4.28327 9.73818C3.94797 9.43081 3.50972 9.26014 3.05485 9.25979Z" fill="black"/>
+                </svg>
+
+                <span>{{ item }}</span>
+              </li>
+            {% endfor %}
+          {% else %}
+            <!-- Default content if metafield isn't set -->
+            <li class="learning-item">
+              {% comment %}
+                <img src="{{ 'tick-01.png' | asset_url }}" alt="Included feature">
+              {% endcomment %}
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3.05485 9.25979C2.70968 9.26076 2.37183 9.35944 2.0804 9.5444C1.78896 9.72937 1.55586 9.99306 1.40804 10.305C1.26022 10.6169 1.20374 10.9643 1.24512 11.307C1.2865 11.6497 1.42406 11.9736 1.64189 12.2414L6.28535 17.9296C6.45091 18.1352 6.66314 18.2983 6.90439 18.4054C7.14565 18.5125 7.40898 18.5605 7.6725 18.5454C8.23612 18.5151 8.74496 18.2136 9.06939 17.7179L18.715 2.18356C18.7166 2.18099 18.7183 2.17841 18.72 2.17587C18.8105 2.03691 18.7811 1.76152 18.5943 1.58852C18.543 1.54102 18.4825 1.50452 18.4165 1.48127C18.3506 1.45803 18.2806 1.44854 18.2108 1.45338C18.141 1.45822 18.073 1.47729 18.0109 1.50941C17.9488 1.54154 17.8939 1.58604 17.8496 1.64018C17.8462 1.64444 17.8426 1.64863 17.8389 1.65276L8.11116 12.6437C8.07414 12.6855 8.02918 12.7196 7.9789 12.7439C7.92861 12.7682 7.874 12.7822 7.81823 12.7852C7.76246 12.7883 7.70664 12.7802 7.65403 12.7614C7.60141 12.7427 7.55304 12.7137 7.51173 12.6761L4.28327 9.73818C3.94797 9.43081 3.50972 9.26014 3.05485 9.25979Z" fill="black"/>
+              </svg>
+
+              <span>Semantic markup</span>
+            </li>
+            <li class="learning-item">
+              {% comment %}
+                <img src="{{ 'tick-01.png' | asset_url }}" alt="Included feature">
+              {% endcomment %}
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3.05485 9.25979C2.70968 9.26076 2.37183 9.35944 2.0804 9.5444C1.78896 9.72937 1.55586 9.99306 1.40804 10.305C1.26022 10.6169 1.20374 10.9643 1.24512 11.307C1.2865 11.6497 1.42406 11.9736 1.64189 12.2414L6.28535 17.9296C6.45091 18.1352 6.66314 18.2983 6.90439 18.4054C7.14565 18.5125 7.40898 18.5605 7.6725 18.5454C8.23612 18.5151 8.74496 18.2136 9.06939 17.7179L18.715 2.18356C18.7166 2.18099 18.7183 2.17841 18.72 2.17587C18.8105 2.03691 18.7811 1.76152 18.5943 1.58852C18.543 1.54102 18.4825 1.50452 18.4165 1.48127C18.3506 1.45803 18.2806 1.44854 18.2108 1.45338C18.141 1.45822 18.073 1.47729 18.0109 1.50941C17.9488 1.54154 17.8939 1.58604 17.8496 1.64018C17.8462 1.64444 17.8426 1.64863 17.8389 1.65276L8.11116 12.6437C8.07414 12.6855 8.02918 12.7196 7.9789 12.7439C7.92861 12.7682 7.874 12.7822 7.81823 12.7852C7.76246 12.7883 7.70664 12.7802 7.65403 12.7614C7.60141 12.7427 7.55304 12.7137 7.51173 12.6761L4.28327 9.73818C3.94797 9.43081 3.50972 9.26014 3.05485 9.25979Z" fill="black"/>
+              </svg>
+
+              <span>Formatting page content</span>
+            </li>
+            <li class="learning-item">
+              {% comment %}
+                <img src="{{ 'tick-01.png' | asset_url }}" alt="Included feature">
+              {% endcomment %}
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3.05485 9.25979C2.70968 9.26076 2.37183 9.35944 2.0804 9.5444C1.78896 9.72937 1.55586 9.99306 1.40804 10.305C1.26022 10.6169 1.20374 10.9643 1.24512 11.307C1.2865 11.6497 1.42406 11.9736 1.64189 12.2414L6.28535 17.9296C6.45091 18.1352 6.66314 18.2983 6.90439 18.4054C7.14565 18.5125 7.40898 18.5605 7.6725 18.5454C8.23612 18.5151 8.74496 18.2136 9.06939 17.7179L18.715 2.18356C18.7166 2.18099 18.7183 2.17841 18.72 2.17587C18.8105 2.03691 18.7811 1.76152 18.5943 1.58852C18.543 1.54102 18.4825 1.50452 18.4165 1.48127C18.3506 1.45803 18.2806 1.44854 18.2108 1.45338C18.141 1.45822 18.073 1.47729 18.0109 1.50941C17.9488 1.54154 17.8939 1.58604 17.8496 1.64018C17.8462 1.64444 17.8426 1.64863 17.8389 1.65276L8.11116 12.6437C8.07414 12.6855 8.02918 12.7196 7.9789 12.7439C7.92861 12.7682 7.874 12.7822 7.81823 12.7852C7.76246 12.7883 7.70664 12.7802 7.65403 12.7614C7.60141 12.7427 7.55304 12.7137 7.51173 12.6761L4.28327 9.73818C3.94797 9.43081 3.50972 9.26014 3.05485 9.25979Z" fill="black"/>
+              </svg>
+
+              <span>Understanding file paths</span>
+            </li>
+            <li class="learning-item">
+              {% comment %}
+                <img src="{{ 'tick-01.png' | asset_url }}" alt="Included feature">
+              {% endcomment %}
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3.05485 9.25979C2.70968 9.26076 2.37183 9.35944 2.0804 9.5444C1.78896 9.72937 1.55586 9.99306 1.40804 10.305C1.26022 10.6169 1.20374 10.9643 1.24512 11.307C1.2865 11.6497 1.42406 11.9736 1.64189 12.2414L6.28535 17.9296C6.45091 18.1352 6.66314 18.2983 6.90439 18.4054C7.14565 18.5125 7.40898 18.5605 7.6725 18.5454C8.23612 18.5151 8.74496 18.2136 9.06939 17.7179L18.715 2.18356C18.7166 2.18099 18.7183 2.17841 18.72 2.17587C18.8105 2.03691 18.7811 1.76152 18.5943 1.58852C18.543 1.54102 18.4825 1.50452 18.4165 1.48127C18.3506 1.45803 18.2806 1.44854 18.2108 1.45338C18.141 1.45822 18.073 1.47729 18.0109 1.50941C17.9488 1.54154 17.8939 1.58604 17.8496 1.64018C17.8462 1.64444 17.8426 1.64863 17.8389 1.65276L8.11116 12.6437C8.07414 12.6855 8.02918 12.7196 7.9789 12.7439C7.92861 12.7682 7.874 12.7822 7.81823 12.7852C7.76246 12.7883 7.70664 12.7802 7.65403 12.7614C7.60141 12.7427 7.55304 12.7137 7.51173 12.6761L4.28327 9.73818C3.94797 9.43081 3.50972 9.26014 3.05485 9.25979Z" fill="black"/>
+              </svg>
+
+              <span>Displaying images</span>
+            </li>
+            <li class="learning-item">
+              {% comment %}
+                <img src="{{ 'tick-01.png' | asset_url }}" alt="Included feature">
+              {% endcomment %}
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3.05485 9.25979C2.70968 9.26076 2.37183 9.35944 2.0804 9.5444C1.78896 9.72937 1.55586 9.99306 1.40804 10.305C1.26022 10.6169 1.20374 10.9643 1.24512 11.307C1.2865 11.6497 1.42406 11.9736 1.64189 12.2414L6.28535 17.9296C6.45091 18.1352 6.66314 18.2983 6.90439 18.4054C7.14565 18.5125 7.40898 18.5605 7.6725 18.5454C8.23612 18.5151 8.74496 18.2136 9.06939 17.7179L18.715 2.18356C18.7166 2.18099 18.7183 2.17841 18.72 2.17587C18.8105 2.03691 18.7811 1.76152 18.5943 1.58852C18.543 1.54102 18.4825 1.50452 18.4165 1.48127C18.3506 1.45803 18.2806 1.44854 18.2108 1.45338C18.141 1.45822 18.073 1.47729 18.0109 1.50941C17.9488 1.54154 17.8939 1.58604 17.8496 1.64018C17.8462 1.64444 17.8426 1.64863 17.8389 1.65276L8.11116 12.6437C8.07414 12.6855 8.02918 12.7196 7.9789 12.7439C7.92861 12.7682 7.874 12.7822 7.81823 12.7852C7.76246 12.7883 7.70664 12.7802 7.65403 12.7614C7.60141 12.7427 7.55304 12.7137 7.51173 12.6761L4.28327 9.73818C3.94797 9.43081 3.50972 9.26014 3.05485 9.25979Z" fill="black"/>
+              </svg>
+
+              <span>Inline vs. block-level elements</span>
+            </li>
+          {% endif %}
+        </ul>
+      </section>
+      {% comment %}
+        {%- assign course_modules = product.metafields.custom.course_modules.value -%}
+
+        {% for module in course_modules %}
+          <section class="curriculum-section {% if forloop.first %}active{% endif %}">
+            <h2 class="section-title">{{ module.module_name.value }}</h2>
+            <p class="section-text">{{ module.module_description.value }}</p>
+
+            <div class="steps-count">
+              <span class="arrow-icon-up">
+                <img src="{{ 'arrow-up-01-round.png' | asset_url }}" alt="Expand section">
+              </span>
+              <span class="arrow-icon-down">
+                <img src="{{ 'arrow-down-01-round.png' | asset_url }}" alt="Collapse section">
+              </span>
+              <span>{{ module.course_titles.value.size }} steps</span>
+            </div>
+            {% assign durations = module.module_durations.value %}
+            <ul class="lesson-list">
+              {% for title in module.course_titles.value %}
+                <li class="lesson-item">
+                  <span class="play-icon-wrapper">
+                    <img src="{{ 'play-circle.png' | asset_url }}" alt="Play lesson">
+                  </span>
+                  <div class="lesson-info">
+                    <h3 class="lesson-title">{{ title }}</h3>
+                    {% if durations[forloop.index0] %}
+                      <span class="lesson-duration">{{ durations[forloop.index0] }}</span>
+                    {% endif %}
+                  </div>
+                </li>
+              {% endfor %}
+            </ul>
+          </section>
+        {% endfor %}
+
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+              const sections = document.querySelectorAll('.curriculum-section');
+
+              // Activate first section by default
+              if (sections.length > 0) {
+                  sections[0].classList.add('active');
+              }
+
+              // Toggle sections on click
+              sections.forEach(section => {
+                  section.addEventListener('click', function() {
+                      const isActive = this.classList.contains('active');
+
+                      // Close all other sections (optional, remove if you want independent toggles)
+                      sections.forEach(s => s.classList.remove('active'));
+
+                      // Toggle the clicked section (open if closed, close if open)
+                      if (!isActive) {
+                          this.classList.add('active');
+                      }
+                  });
+              });
+          });
+        </script>
+      {% endcomment %}
+    </div>
+    {%- assign course_instructor = product.metafields.custom.course_instructor.value -%}
+    {% for instructor in course_instructor %}
+      <aside class="sidebar">
+        <div class="teacher-card">
+          <h2 class="card-title">Teacher</h2>
+          <div class="teacher-info">
+            <div class="teacher-details">
+              <h3 class="teacher-name">{{ instructor.course_instructor_name.value }}</h3>
+              <p class="teacher-bio">{{ instructor.course_instructor_details.value }}</p>
+            </div>
+            <img
+              src="{{ instructor.course_instructor_photo.value | img_url: '300x' }}"
+              alt="{{ instructor.course_instructor_name.value }}"
+              class="teacher-image"
+              onerror="console.log('Image failed to load:', this.src)"
+            >
+          </div>
+          <div class="download-info">
+            <h3 class="download-title">Download videos</h3>
+            <p class="download-text">You need to sign up for Treehouse in order to download course videos.</p>
+          </div>
+          <button class="button-primary">
+            <span>Sign up</span>
+            <svg width="48" height="28" viewBox="0 0 48 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0_2017_14)">
+              <rect width="48" height="28" rx="6" fill="#5A287D"/>
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M27.085 14.8333L23.4236 18.5731C23.0493 18.9553 23.0493 19.5667 23.4236 19.949C23.8092 20.3429 24.4433 20.3429 24.8289 19.949L29.965 14.703C30.345 14.3148 30.345 13.6855 29.965 13.2974L24.8289 8.05105C24.4433 7.65715 23.8092 7.65713 23.4236 8.05101C23.0493 8.43328 23.0493 9.04462 23.4235 9.42691L27.0847 13.1667H18.5833C18.1231 13.1667 17.75 13.5398 17.75 14C17.75 14.4602 18.1231 14.8333 18.5833 14.8333H27.085Z" fill="white"/>
+              </g>
+              <defs>
+              <clipPath id="clip0_2017_14">
+              <rect width="48" height="28" rx="6" fill="white"/>
+              </clipPath>
+              </defs>
+            </svg>
+
+            {% comment %}
+                <img
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/8f5429bb61938a0b139a542403f0457859885ff4?placeholderIfAbsent=true&apiKey=b31a03c3d4854c2d96c181e1da48a45f"
+                alt=""
+                class="button-icon"
+              >
+            {% endcomment %}
+          </button>
+        </div>
+      </aside>
+    {% endfor %}
+  </div>
+</main>
+
+<section class="related-courses">
+  <div class="section-header">
+    <div class="header-content">
+      <h2 class="section-title">Related Courses</h2>
+      <p class="section-description">Browse courses across an array of topics and disciplines.</p>
+    </div>
+    <a href="/collections/all" class="button-primary">
+      <span>View All {{ collections.all.products_count }}+</span>
+      <svg width="48" height="29" viewBox="0 0 48 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g clip-path="url(#clip0_2017_217)">
+        <rect x="0.0297852" y="0.651367" width="47.2733" height="27.5761" rx="5.90916" fill="#5A287D"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M26.7049 15.2601L23.0989 18.9433C22.7303 19.3197 22.7303 19.9218 23.0989 20.2983C23.4787 20.6863 24.1032 20.6863 24.483 20.2983L29.5413 15.1318C29.9155 14.7494 29.9155 14.1297 29.5413 13.7474L24.483 8.58052C24.1032 8.19258 23.4787 8.19256 23.0989 8.58048C22.7303 8.95696 22.7303 9.55904 23.0989 9.93554L26.7046 13.6187H18.3319C17.8787 13.6187 17.5112 13.9861 17.5112 14.4394C17.5112 14.8926 17.8787 15.2601 18.3319 15.2601H26.7049Z" fill="white"/>
+        </g>
+        <defs>
+        <clipPath id="clip0_2017_217">
+        <rect x="0.0297852" y="0.651367" width="47.2733" height="27.5761" rx="5.90916" fill="white"/>
+        </clipPath>
+        </defs>
+      </svg>
+    </a>
+  </div>
+
+  <div class="course-grid">
+    {% comment %} Get related products - you can customize this logic {% endcomment %}
+    {% assign related_collection = collections.all %}
+    {% assign product_limit = 3 %}
+
+    {% comment %}
+      Alternative approaches for related products:
+      1. By collection: {% assign related_collection = product.collections.first %}
+      2. By tag: Create a collection with the same tag as current product
+      3. By metafield: If you have manually selected related products
+    {% endcomment %}
+
+    {% for related_product in related_collection.products limit: product_limit %}
+      {% unless related_product.handle == product.handle %}
+        <article class="course-card">
+          <a href="{{ related_product.url }}" class="card-link" aria-label="{{ related_product.title | escape }}"></a>
+          <img
+            src="{{ related_product.featured_image | img_url: '800x' }}"
+            alt="{{ related_product.title | escape }}"
+            class="card-image"
+            width="800"
+            height="240"
+            loading="lazy"
+          >
+          <div class="card-content">
+            <div class="card-body">
+              <h3 class="card-title">
+                <a href="{{ related_product.url }}" class="card-title-link">{{ related_product.title }}</a>
+              </h3>
+              <div class="student-count">
+                {%- assign rating2 = related_product.metafields.custom.course_rating -%}
+                <div class="ks-star-rating">
+                  <svg viewBox="0 0 1000 200" class="rating">
+                    <defs>
+                      <polygon id="star" points="100,0 131,66 200,76 150,128 162,200 100,166 38,200 50,128 0,76 69,66 "></polygon>
+                      <clipPath id="stars">
+                        <use xlink:href="#star"></use>
+                        <use xlink:href="#star" x="20%"></use>
+                        <use xlink:href="#star" x="40%"></use>
+                        <use xlink:href="#star" x="60%"></use>
+                        <use xlink:href="#star" x="80%"></use>
+                      </clipPath>
+                    </defs>
+                    <rect class="rating__background" clip-path="url(#stars)"></rect>
+                    <rect width="{{ rating2 | times: 20 }}%" class="rating__value" clip-path="url(#stars)"></rect>
+                  </svg>
+                </div>
+                <span>
+                  {% if related_product.metafields.custom.students_count %}
+                    | {{ related_product.metafields.custom.students_count }} Students
+                  {% else %}
+                    | 0 Students
+                  {% endif %}
+                </span>
+              </div>
+              <p class="card-description">
+                {{ related_product.description | strip_html | truncate: 150 }}
+              </p>
+              <div class="card-tags">
+                {% if related_product.tags.size > 0 %}
+                  {% for tag in related_product.tags limit: 2 %}
+                    <span class="tag {% cycle 'tag-primary', 'tag-secondary' %}">
+                      {{ tag }}
+                    </span>
+                  {% endfor %}
+                {% else %}
+                  <span class="tag tag-primary">Featured</span>
+                  <span class="tag tag-secondary">New</span>
+                {% endif %}
+              </div>
+            </div>
+            <a href="{{ related_product.url }}" class="card-title-link">
+              <svg width="59" height="33" viewBox="0 0 59 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_37_1302)">
+                <rect x="0.469238" y="0.558838" width="57.6533" height="31.7093" rx="8.64799" fill="#5A287D"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M32.1369 17.2795L28.9705 20.5136C28.6468 20.8442 28.6468 21.3729 28.9705 21.7035C29.304 22.0442 29.8523 22.0442 30.1858 21.7035L34.6275 17.1668C34.9561 16.8311 34.9561 16.2869 34.6275 15.9512L30.1858 11.4142C29.8523 11.0735 29.304 11.0735 28.9705 11.4142C28.6468 11.7447 28.6468 12.2734 28.9704 12.604L32.1366 15.8382H24.7846C24.3866 15.8382 24.064 16.1608 24.064 16.5588C24.064 16.9568 24.3866 17.2795 24.7846 17.2795H32.1369Z" fill="white"/>
+                </g>
+                <defs>
+                <clipPath id="clip0_37_1302">
+                <rect x="0.469238" y="0.558838" width="57.6533" height="31.7093" rx="8.64799" fill="white"/>
+                </clipPath>
+                </defs>
+              </svg>
+            </a>
+          </div>
+        </article>
+      {% endunless %}
+    {% endfor %}
+  </div>
+</section>
+<div id="trailerModal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    {%- assign trailer = product.metafields.custom.product_trailer.value -%}
+
+    <div class="video-container">
+      {% if trailer %}
+        {% comment %} Handle Shopify-hosted video {% endcomment %}
+        <video controls playsinline>
+          {% for source in trailer.sources %}
+            <source src="{{ source.url }}" type="{{ source.mime_type }}">
+          {% endfor %}
+          Your browser does not support the video tag.
+        </video>
+
+      {% elsif trailer contains 'youtube.com' or trailer contains 'youtu.be' %}
+        {% comment %} YouTube embed code {% endcomment %}
+
+      {% elsif trailer contains 'vimeo.com' %}
+        {% comment %} Vimeo embed code {% endcomment %}
+
+      {% else %}
+        {% comment %} Error message {% endcomment %}
+      {% endif %}
+    </div>
+  </div>
+</div>

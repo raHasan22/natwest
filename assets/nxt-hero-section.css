@@ -1,0 +1,251 @@
+.nxt-hero__area {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 107px 15px;
+  overflow: hidden;
+}
+
+.nxt-hero__container {
+  max-width: 1300px;
+  width: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.nxt-hero__content {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  z-index: 2;
+  max-width: 613px;
+  width: 100%;
+}
+
+.nxt-hero__title-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 567px;
+}
+
+.nxt-hero__title {
+  color: white;
+  font-size: 56px;
+  font-family: "Knile";
+  font-weight: 400;
+  line-height: 140%;
+  position: relative;
+  z-index: 2;
+  margin: 0;
+}
+
+.nxt-hero__search-area {
+  background: rgba(255, 255, 255, 0.65);
+  border-radius: 10px;
+  border: 2px solid #612587;
+  padding: 14px;
+  backdrop-filter: blur(10px);
+}
+
+.nxt-hero__languages {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.nxt-hero__language-row {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+@media (min-width: 992px) {
+  .nxt-hero__language-card {
+    width: calc(33.33% - 7px * 2 / 3);
+    max-width: calc(33.33% - 7px * 2 / 3);
+  }
+}
+@media (max-width: 991px) {
+  .nxt-hero__language-card {
+    width: calc(50% - 7px * 1 / 2);
+    max-width: calc(50% - 7px * 1 / 2);
+  }
+}
+.nxt-hero__language-card {
+  background: white;
+  border-radius: 7px;
+  border: 1px solid #5a287d;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-height: 57px;
+  text-decoration: none;
+}
+
+.nxt-hero__language-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(90, 40, 125, 0.2);
+}
+
+.nxt-hero__language-icon {
+  width: 25px;
+  height: 25px;
+  flex-shrink: 0;
+}
+img.nxt-hero__language-icon {
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid #d7d4cf;
+  border-radius: 50%;
+}
+
+.nxt-hero__language-text {
+  color: #151515;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.nxt-hero__image-area {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  max-width: 586px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  right: 0;
+}
+
+.nxt-hero__image-bg {
+  display: flex;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  left: 0;
+  bottom: 0;
+}
+.nxt-hero__image-bg svg {
+  width: 100%;
+  height: 100%;
+}
+
+.nxt-hero__image {
+  position: relative;
+  z-index: 3;
+  left: 9px;
+  bottom: 5px;
+  max-width: 586px;
+  width: 100%;
+  height: 100%;
+  border-radius: 3px;
+  clip-path: polygon(0 0, 100% 13%, 100% 100%, 0% 100%);
+  overflow: hidden;
+  display: flex;
+}
+
+.nxt-hero__image img {
+  max-width: 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 3px;
+}
+.white-svg {
+  position: absolute;
+  top: 13px;
+  left: 203px;
+}
+
+.colored-svg {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .nxt-hero__container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .nxt-hero__image-area {
+    max-width: 430px;
+  }
+  .nxt-hero__content {
+    max-width: 531px;
+  }
+}
+@media (min-width: 992px) and (max-width: 1200px) {
+  .nxt-hero__title {
+    font-size: 52px;
+  }
+  .white-svg {
+    left: 190px;
+    top: 10px;
+  }
+  .white-svg svg {
+    width: 260px;
+  }
+}
+
+@media (max-width: 991px) {
+  .nxt-hero__area {
+    align-items: start;
+  }
+  .nxt-hero__content {
+    margin: 0 auto;
+    text-align: center;
+    max-width: 613px;
+  }
+  .nxt-hero__image-area {
+    position: relative;
+    margin: 0 auto;
+  }
+  .nxt-hero__title-wrapper {
+    margin: 0 auto;
+  }
+}
+@media (max-width: 767px) {
+  .nxt-hero__search-area {
+    padding: 1rem;
+  }
+
+  .nxt-hero__image-area {
+    margin-top: 2rem;
+  }
+  .nxt-hero__content {
+    gap: 30px;
+  }
+}
+@media (max-width: 640px) {
+  .nxt-hero__title {
+    font-size: 34px;
+    line-height: 40px;
+  }
+  .white-svg {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .nxt-hero__language-card {
+    padding: 0.75rem;
+    min-height: 50px;
+  }
+
+  .nxt-hero__language-text {
+    font-size: 10px;
+  }
+  img.nxt-hero__language-icon {
+    width: 18px;
+    height: 18px;
+  }
+}
