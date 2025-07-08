@@ -31,3 +31,7 @@ h2#verticalTitle {
 #FacetFiltersForm details label:hover {
   color: #5a287d;
 }
+ul#product-grid li {
+  box-shadow: 2px 4px 10px 0px #0000000d;
+  border-radius: 17px;
+}

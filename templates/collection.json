@@ -27,16 +27,7 @@
         "hero_subtitle": "",
         "background_color": "#5a287d",
         "text_color": "#ffffff",
-        "text_alignment": "center",
-        "title_size_desktop": 56,
-        "subtitle_size_desktop": 18,
-        "title_size_tablet": 48,
-        "subtitle_size_tablet": 16,
-        "title_size_mobile": 36,
-        "subtitle_size_mobile": 14,
-        "padding_desktop": 25,
-        "padding_tablet": 25,
-        "padding_mobile": 20
+        "text_alignment": "center"
       }
     },
     "product-grid": {
@@ -58,11 +49,100 @@
         "padding_top": 68,
         "padding_bottom": 68
       }
+    },
+    "sa_learn_daily_section_DefxaW": {
+      "type": "sa-learn-daily-section",
+      "blocks": {
+        "language_card_fbjx3c": {
+          "type": "language_card",
+          "settings": {
+            "icon": "shopify://shop_images/Graphics-symbol_img.png",
+            "title": "Spanish (Mexico)",
+            "link": "",
+            "card_bg": "#FFFFFF",
+            "card_border": "#5A287D",
+            "text_color": "#151515"
+          }
+        },
+        "language_card_9RHrTw": {
+          "type": "language_card",
+          "settings": {
+            "icon": "shopify://shop_images/Graphics-symbol_img_2.png",
+            "title": "French",
+            "link": "",
+            "card_bg": "#FFFFFF",
+            "card_border": "#5A287D",
+            "text_color": "#151515"
+          }
+        },
+        "language_card_MWkWBf": {
+          "type": "language_card",
+          "settings": {
+            "icon": "shopify://shop_images/Graphics-symbol_img_4.png",
+            "title": "German",
+            "link": "",
+            "card_bg": "#FFFFFF",
+            "card_border": "#5A287D",
+            "text_color": "#151515"
+          }
+        },
+        "language_card_gpT3tJ": {
+          "type": "language_card",
+          "settings": {
+            "icon": "shopify://shop_images/Graphics-symbol_img_3.png",
+            "title": "Italian",
+            "link": "",
+            "card_bg": "#FFFFFF",
+            "card_border": "#5A287D",
+            "text_color": "#151515"
+          }
+        },
+        "language_card_ARhWjt": {
+          "type": "language_card",
+          "settings": {
+            "icon": "shopify://shop_images/Graphics-symbol_img_1.png",
+            "title": "Spanish",
+            "link": "",
+            "card_bg": "#FFFFFF",
+            "card_border": "#5A287D",
+            "text_color": "#151515"
+          }
+        },
+        "language_card_cL9rEz": {
+          "type": "language_card",
+          "settings": {
+            "icon": "shopify://shop_images/SVG_1.png",
+            "title": "More",
+            "link": "",
+            "card_bg": "#FFFFFF",
+            "card_border": "#5A287D",
+            "text_color": "#151515"
+          }
+        }
+      },
+      "block_order": [
+        "language_card_fbjx3c",
+        "language_card_9RHrTw",
+        "language_card_MWkWBf",
+        "language_card_gpT3tJ",
+        "language_card_ARhWjt",
+        "language_card_cL9rEz"
+      ],
+      "name": "SA Language Cards Section",
+      "settings": {
+        "title": "Babbel helps millions learn daily",
+        "title_color": "#5A287D",
+        "background_color": "#5A287D",
+        "desktop_columns": 6,
+        "mobile_columns": 2,
+        "section_padding": 70
+      }
     }
   },
   "order": [
     "banner",
     "sa_collection_hero_9N76Hq",
-    "product-grid"
+    "product-grid",
+    "sa_learn_daily_section_DefxaW"
   ]
 }
